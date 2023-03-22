@@ -8,5 +8,6 @@
 </head>
 <body>
 	<jsp:include page="/Frame/Header1.jsp" />
+	<h2>테스트</h2>
 </body>
 </html>
