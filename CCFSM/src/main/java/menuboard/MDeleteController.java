@@ -25,14 +25,13 @@ public class MDeleteController extends HttpServlet {
 			throws ServletException, IOException {
 		// 매개변수 저장
 		String idx = request.getParameter("idx");
-		System.out.println("idx : " + idx);
 		
 		// 게시물 삭제
 		MenuBoardDAO dao = new MenuBoardDAO(); 
+		MenuBoardDTO dto = dao.selectView(idx);
 		int result = dao.deletePost(idx);
 		dao.close();
 		
-		MenuBoardDTO dto = dao.selectView(idx);
 		
 		if(result == 1) { // 게시물 삭제 성공 시 첨부파일도 삭제
 			String saveFileName = dto.getSfile();

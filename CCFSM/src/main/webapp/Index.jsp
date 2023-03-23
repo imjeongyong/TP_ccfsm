@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>분당구 어린이 급식지원 관리 센터</title>
+	<jsp:include page="/Frame/Header1.jsp" />
+	<jsp:include page="/Frame/MenuTab.jsp" />
+	
 </head>
 <body>
-	<jsp:include page="/Frame/Header1.jsp" />
-	<h2>테스트</h2>
 </body>
 </html>

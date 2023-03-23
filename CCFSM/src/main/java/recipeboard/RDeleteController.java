@@ -31,10 +31,10 @@ public class RDeleteController extends HttpServlet {
 
 		// 게시물 삭제
 		RecipeBoardDAO dao = new RecipeBoardDAO();
+		RecipeBoardDTO dto = dao.selectView(idx);
 		int result = dao.deletePost(idx);
 		dao.close();
 
-		RecipeBoardDTO dto = dao.selectView(idx);
 
 		if (result == 1) { // 게시물 삭제 성공 시 첨부파일도 삭제
 			String saveFileName = dto.getSfile();

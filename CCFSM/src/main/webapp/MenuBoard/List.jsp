@@ -9,8 +9,9 @@
 <style>a{text-decoration:none;}</style>
 </head>
 <body>
-    <h2>메뉴 게시판 - 목록 보기(List)</h2>
-
+	<jsp:include page="/Frame/Header1.jsp" />
+	<jsp:include page="/Frame/MenuTab.jsp" />
+	
     <!-- 검색 폼 -->
     <form method="get">  
     <table border="1" width="90%">
