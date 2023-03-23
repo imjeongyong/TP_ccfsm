@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	height: 100vh;
+}
+
+.container {
+	border: 1px
+	solid
+	#000;
+}
+
+header {
+	background-color: yellowgreen;
+	color: #fff;
+	padding: 2em;
+	text-align: center;
+	height: 50px;
+}
+
+section {
+	border: 1px solid red;
+	display: flex;
+}
+
+nav, article, aside {
+	border: 1px solid black;
+	height: calc(100vh - 200px);
+}
+
+nav {
+	flex: 1;
+	background-color: #eee;
+}
+
+article {
+	flex: 3;
+	background-color: #ddd;
+}
+
+aside {
+	flex: 1;
+	background-color: #ccc;
+}
+
+footer {
+	background-color: gray;
+	color: #fff;
+	height: 150px;
+}
