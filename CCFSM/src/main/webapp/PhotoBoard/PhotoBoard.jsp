@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>인사말</title>
+<title>포토 갤러리</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Resources/layout.css">
 <jsp:include page="/Frame/Header1.jsp" />
@@ -20,7 +20,7 @@
 				<h3>사이드바 페이지 인클루드</h3>
 			</nav>
 			<article>
-				<h3>반갑습니다~~~~~~~~~~</h3>
+				<h3>포토 갤러리~~</h3>
 			</article>
 			<aside>
 				<h3>칸 떼우기 사진</h3>

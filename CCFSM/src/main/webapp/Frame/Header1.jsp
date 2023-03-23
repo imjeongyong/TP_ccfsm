@@ -3,20 +3,20 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Resources/Header1.css">
  </head>
 	<div class="head">
-		<td align="right">
-			<a href="${pageContext.request.contextPath}/Index.jsp">HOME |</a>
+		<td>
+			<a class="head1" href="${pageContext.request.contextPath}/Index.jsp">HOME |</a>
 			<%
 			if (session.getAttribute("UserId") == null) {
 			%>
-			<a href="${pageContext.request.contextPath}/Login/LoginForm.jsp">LOGIN |</a>
+			<a class="head1" href="${pageContext.request.contextPath}/Login/LoginForm.jsp">LOGIN |</a>
 			<%
 			} else {
 			%>
-			<a href="../Login/Logout.jsp">LOGOUT |</a>
+			<a class="head1" href="${pageContext.request.contextPath}/Login/Logout.jsp">LOGOUT |</a>
 			<%
 			}
 			%>
-			<a href="${pageContext.request.contextPath}/Login/Join.jsp">JOIN |</a>
-			<a href="../">SITEMAP</a>
+			<a class="head1" href="${pageContext.request.contextPath}/Login/Join.jsp">JOIN |</a>
+			<a class="head1" href="../">SITEMAP</a>
 		</td>
 	</div>
