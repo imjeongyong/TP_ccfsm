@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메뉴 게시판</title>
+<title>식단표 작성</title>
 <script type="text/javascript">
 	function validateForm(form) {
 		if (form.title.value == "") {
@@ -20,13 +20,29 @@
 		}
 	}
 </script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Resources/layout.css">
+<jsp:include page="/Frame/Header1.jsp" />
 </head>
 <body>
-	<h2>메뉴 - 글쓰기(Write)</h2>
+	<div class="container">
+		<header>
+			<jsp:include page="/Frame/MenuTab.jsp" />
+		</header>
+		<section>
+			<nav>
+				<jsp:include page="/Navigator/Board.jsp" />
+			</nav>
+			<article>
+	<h2>식단표 작성하기</h2>
 	<form name="writeForm" method="post" enctype="multipart/form-data"
 		action="../menuboard/write.do" onsubmit="return validateForm(this);">
 
 		<table border="1" width="90%">
+			<tr>
+				<td>작성자</td>
+				<td><input type="hidden" name="userid" value="${sessionScope.UserId }" style="width: 90%;" /></td>
+			</tr>
 			<tr>
 				<td>제목</td>
 				<td><input type="text" name="title" style="width: 90%;" /></td>
@@ -51,5 +67,15 @@
 		</table>
 
 	</form>
+		</article>
+			<aside>
+				<h3>칸 떼우기 사진</h3>
+			</aside>
+		</section>
+		<footer>
+			<h3>푸터</h3>
+		</footer>
+	</div>
+
 </body>
 </html>

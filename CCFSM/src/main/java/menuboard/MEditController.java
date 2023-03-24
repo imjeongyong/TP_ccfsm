@@ -64,17 +64,14 @@ public class MEditController extends HttpServlet {
 		String idx = mr.getParameter("idx");
 		String prevOfile = mr.getParameter("prevOfile");
 		String prevSfile = mr.getParameter("prevSfile");
-
-		// HttpSession session = request.getSession();
-		// String name = (String)session.getAttribute("name");
-
-		String name = "작성자";
+		String userid = mr.getParameter("userid");
 		String title = mr.getParameter("title");
 		String content = mr.getParameter("content");
 
 		// DTO에 저장
 		MenuBoardDTO dto = new MenuBoardDTO();
 		dto.setIdx(idx);
+		dto.setUserid(userid);
 		dto.setTitle(title);
 		dto.setContent(content);
 

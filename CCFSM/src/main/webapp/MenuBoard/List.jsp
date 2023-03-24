@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메뉴 게시판</title>
+<title>식단표</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Resources/layout.css">
 <jsp:include page="/Frame/Header1.jsp" />
@@ -17,9 +17,10 @@
 		</header>
 		<section>
 			<nav>
-				<h3>사이드바 페이지 인클루드</h3>
+				<jsp:include page="/Navigator/Board.jsp" />
 			</nav>
 			<article>
+			<h2>식단표</h2>
 				<!-- 검색 폼 -->
 				<form method="get">
 					<table border="1" width="90%">
@@ -61,7 +62,7 @@
 										<!-- 제목(링크) --> <a
 										href="../menuboard/view.do?idx=${ row.idx }">${ row.title }</a>
 									</td>
-									<td>${sessionScope.uName }</td>
+									<td>${row.userid }</td>
 									<!-- 작성자 -->
 									<td>${ row.visitcount }</td>
 									<!-- 조회수 -->
@@ -93,7 +94,6 @@
 						</td>
 					</tr>
 				</table>
-				<h2>${sessionScope.UserId }</h2>
 			</article>
 			<aside>
 				<h3>칸 떼우기 사진</h3>

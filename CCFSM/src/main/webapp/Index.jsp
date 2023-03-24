@@ -10,7 +10,6 @@
 <jsp:include page="/Frame/Header1.jsp" />
 </head>
 <body>
-
 	<div class="container">
 		<header>
 			<jsp:include page="/Frame/MenuTab.jsp" />
@@ -23,13 +22,12 @@
 				<h3>메인 페이지 인클루드</h3>
 			</article>
 			<aside>
-				<h3>칸 떼우기 사진</h3>
+				<h3>사<br />이<br />드<br />바<br /></h3>
 			</aside>
 		</section>
 		<footer>
 			<h3>푸터</h3>
 		</footer>
 	</div>
-
 </body>
 </html>

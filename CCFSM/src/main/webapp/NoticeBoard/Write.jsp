@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>식단표 게시글 수정</title>
+<title>공지사항 작성</title>
 <script type="text/javascript">
 	function validateForm(form) {
 		if (form.title.value == "") {
@@ -34,29 +34,25 @@
 				<jsp:include page="/Navigator/Board.jsp" />
 			</nav>
 			<article>
-				<h2>식단표 게시글 수정하기</h2>
-				<form name="writeFrm" method="post" enctype="multipart/form-data"
-					action="../menuboard/edit.do" onsubmit="return validateForm(this);">
-					<input type="hidden" name="idx" value="${dto.idx }" /> <input
-						type="hidden" name="prevOfile" value="${dto.ofile }" /> <input
-						type="hidden" name="prevSfile" value="${dto.sfile }" />
+				<h2>공지사항 작성하기</h2>
+				<form name="writeForm" method="post" enctype="multipart/form-data"
+					action="../noticeboard/write.do"
+					onsubmit="return validateForm(this);">
 
 					<table border="1" width="90%">
 						<tr>
 							<td>작성자</td>
 							<td><input type="hidden" name="userid"
-								value="${dto.userid }" style="width: 150px;" /></td>
+								value="${sessionScope.UserId }" style="width: 90%;" /></td>
 						</tr>
 						<tr>
 							<td>제목</td>
-							<td><input type="text" name="title" style="width: 90%"
-								value="${dto.title }" /></td>
+							<td><input type="text" name="title" style="width: 90%;" /></td>
 						</tr>
 						<tr>
 							<td>내용</td>
 							<td><textarea name="content"
-									style="width: 90%; height: 100px;">${dto.content } </textarea>
-							</td>
+									style="width: 90%; height: 100px;"></textarea></td>
 						</tr>
 						<tr>
 							<td>첨부 파일</td>
@@ -67,7 +63,7 @@
 								<button type="submit">작성 완료</button>
 								<button type="reset">RESET</button>
 								<button type="button"
-									onclick="location.href='../menuboard/list.do';">목록
+									onclick="location.href='../noticeboard/list.do';">목록
 									바로가기</button>
 							</td>
 						</tr>
@@ -75,14 +71,13 @@
 				</form>
 			</article>
 			<aside>
-				<h3>
-					사<br />이<br />드<br />바<br />
-				</h3>
+				<h3>칸 떼우기 사진</h3>
 			</aside>
 		</section>
 		<footer>
 			<h3>푸터</h3>
 		</footer>
 	</div>
+
 </body>
 </html>

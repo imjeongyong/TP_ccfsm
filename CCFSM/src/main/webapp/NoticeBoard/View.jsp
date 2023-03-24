@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>레시피 게시판</title>
+<title>공지사항</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Resources/layout.css">
 <jsp:include page="/Frame/Header1.jsp" />
@@ -17,11 +17,10 @@
 		</header>
 		<section>
 			<nav>
-				<jsp:include page="/Navigator/Board.jsp" />
+				<jsp:include page="/Navigator/Notice.jsp" />
 			</nav>
 			<article>
-				<h2>레시피 상세보기</h2>
-
+				<h2>공지사항 게시글 조회</h2>
 				<table border="1" width="90%">
 					<colgroup>
 						<col width="15%" />
@@ -35,7 +34,7 @@
 						<td>번호</td>
 						<td>${dto.idx }</td>
 						<td>작성자</td>
-						<td>${sessionScope.UserId }</td>
+						<td>${dto.userid }</td>
 					</tr>
 					<tr>
 						<td>작성일</td>
@@ -52,9 +51,8 @@
 					<tr>
 						<td>첨부파일</td>
 						<td><c:if test="${not empty dto.ofile }">
-				${dto.ofile }
-				<a
-									href="../recipeboard/download.do?ofile=${dto.ofile}&sfile=${dto.sfile }&idx=${dto.idx }">[다운로드]</a>
+							${dto.ofile }
+							<a href="../noticeboard/download.do?ofile=${dto.ofile}&sfile=${dto.sfile }&idx=${dto.idx }">[다운로드]</a>
 							</c:if></td>
 						<td>다운로드수</td>
 						<td>${dto.downcount }</td>
@@ -62,15 +60,17 @@
 					<!-- 하단 메뉴(버튼) -->
 					<tr>
 						<td colspan="4" align="center">
-							<button type="button"
-								onclick="location.href='../recipeboard/edit.do?idx=${param.idx }';">
-								수정하기</button>
-							<button type="button"
-								onclick="location.href='../recipeboard/delete.do?idx=${param.idx}';">
-								삭제하기</button>
-							<button type="button"
-								onclick="location.href='../recipeboard/list.do';">목록
-								바로가기</button>
+						<c:set var="isAdmin" value="admin" /> 
+						<c:if test="${sessionScope.UserId eq isAdmin }">
+								<button type="button"
+									onclick="location.href='../noticeboard/edit.do?idx=${param.idx }';">
+									수정하기</button>
+								<button type="button"
+									onclick="location.href='../noticeboard/delete.do?idx=${param.idx}';">
+									삭제하기</button>
+						</c:if>
+						<button type="button"
+							onclick="location.href='../noticeboard/list.do';">목록 바로가기</button>
 						</td>
 					</tr>
 				</table>

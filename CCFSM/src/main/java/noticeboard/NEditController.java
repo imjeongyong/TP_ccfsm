@@ -1,4 +1,4 @@
-package recipeboard;
+package noticeboard;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,13 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 
 import fileupload.FileUtil;
+import menuboard.MenuBoardDAO;
+import menuboard.MenuBoardDTO;
 import utils.JSFunction;
 
 /**
- * Servlet implementation class REditController
+ * Servlet implementation class NEditController
  */
-@WebServlet("/recipeboard/edit.do")
-public class REditController extends HttpServlet {
+@WebServlet("/noticeboard/edit.do")
+public class NEditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -31,10 +33,10 @@ public class REditController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String idx = request.getParameter("idx");
-		RecipeBoardDAO dao = new RecipeBoardDAO();
-		RecipeBoardDTO dto = dao.selectView(idx);
+		NoticeBoardDAO dao = new NoticeBoardDAO();
+		NoticeBoardDTO dto = dao.selectView(idx);
 		request.setAttribute("dto", dto);
-		request.getRequestDispatcher("/RecipeBoard/Edit.jsp").forward(request, response);
+		request.getRequestDispatcher("/NoticeBoard/Edit.jsp").forward(request, response);
 	}
 
 	/**
@@ -69,7 +71,7 @@ public class REditController extends HttpServlet {
 		String content = mr.getParameter("content");
 
 		// DTO에 저장
-		RecipeBoardDTO dto = new RecipeBoardDTO();
+		NoticeBoardDTO dto = new NoticeBoardDTO();
 		dto.setIdx(idx);
 		dto.setUserid(userid);
 		dto.setTitle(title);
@@ -102,17 +104,17 @@ public class REditController extends HttpServlet {
 		}
 
 		// DB에 수정 내용 반영
-		RecipeBoardDAO dao = new RecipeBoardDAO();
+		NoticeBoardDAO dao = new NoticeBoardDAO();
 		int result = dao.updatePost(dto);
 		dao.close();
 		
 		// 성공 or 실패 ?
 		if (result == 1) {
 			// 수정 성공
-			response.sendRedirect("../recipeboard/view.do?idx=" + idx);
+			response.sendRedirect("../noticeboard/view.do?idx=" + idx);
 		} else {
 			// 수정 실패
-			JSFunction.alertLocation(response, "게시물 수정 실패", "../recipeboard/view.do?idx=" + idx);
+			JSFunction.alertLocation(response, "게시물 수정 실패", "../noticeboard/view.do?idx=" + idx);
 		}
 	}
 }

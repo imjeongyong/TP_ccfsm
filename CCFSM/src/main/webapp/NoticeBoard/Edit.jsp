@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>식단표 게시글 수정</title>
+<title>공지사항 게시글 수정</title>
 <script type="text/javascript">
 	function validateForm(form) {
 		if (form.title.value == "") {
@@ -31,16 +31,16 @@
 		</header>
 		<section>
 			<nav>
-				<jsp:include page="/Navigator/Board.jsp" />
+				<jsp:include page="/Navigator/Notice.jsp" />
 			</nav>
 			<article>
-				<h2>식단표 게시글 수정하기</h2>
+				<h2>공지사항 게시글 수정하기</h2>
 				<form name="writeFrm" method="post" enctype="multipart/form-data"
-					action="../menuboard/edit.do" onsubmit="return validateForm(this);">
+					action="../noticeboard/edit.do"
+					onsubmit="return validateForm(this);">
 					<input type="hidden" name="idx" value="${dto.idx }" /> <input
 						type="hidden" name="prevOfile" value="${dto.ofile }" /> <input
 						type="hidden" name="prevSfile" value="${dto.sfile }" />
-
 					<table border="1" width="90%">
 						<tr>
 							<td>작성자</td>
@@ -67,7 +67,7 @@
 								<button type="submit">작성 완료</button>
 								<button type="reset">RESET</button>
 								<button type="button"
-									onclick="location.href='../menuboard/list.do';">목록
+									onclick="location.href='../noticeboard/list.do';">목록
 									바로가기</button>
 							</td>
 						</tr>

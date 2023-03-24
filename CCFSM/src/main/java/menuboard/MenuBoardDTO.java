@@ -3,6 +3,7 @@ package menuboard;
 public class MenuBoardDTO {
 
 	private String idx;
+	private String userid;
 	private String title;
 	private String content;
 	private java.sql.Date postdate;
@@ -14,9 +15,17 @@ public class MenuBoardDTO {
 	public String getIdx() {
 		return idx;
 	}
-
+	
 	public void setIdx(String idx) {
 		this.idx = idx;
+	}
+	
+	public String getUserid() {
+		return userid;
+	}
+	
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 	public String getTitle() {

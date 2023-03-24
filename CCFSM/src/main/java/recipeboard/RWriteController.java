@@ -59,6 +59,7 @@ public class RWriteController extends HttpServlet {
 		// 폼값을 DTO에 저장
 		RecipeBoardDTO dto = new RecipeBoardDTO();
 		dto.setTitle(mr.getParameter("title"));
+		dto.setUserid(mr.getParameter("userid"));
 		dto.setContent(mr.getParameter("content"));
 
 		// 원본 파일명과 저장된 파일 이름 설정
@@ -92,5 +93,4 @@ public class RWriteController extends HttpServlet {
 			response.sendRedirect("../recipeboard/write.do");
 		}
 	}
-
 }

@@ -62,6 +62,7 @@ public class RecipeBoardDAO extends DBConnPool{
 				RecipeBoardDTO dto = new RecipeBoardDTO();
 
 				dto.setIdx(rs.getString("idx"));
+				dto.setUserid(rs.getString("userid"));
 				dto.setTitle(rs.getString("title"));
 				dto.setContent(rs.getString("content"));
 				dto.setPostdate(rs.getDate("postdate"));
@@ -83,15 +84,16 @@ public class RecipeBoardDAO extends DBConnPool{
 		int result = 0;
 
 		try {
-			String query = "INSERT INTO recipeboard ( " + " idx, title, content, ofile, sfile) " + " VALUES (  "
-					+ " seq_board_num.NEXTVAL, ?, ?, ?, ?)";
+			String query = "INSERT INTO recipeboard ( " + " idx, userid, title, content, ofile, sfile) " + " VALUES (  "
+					+ " seq_board_num.NEXTVAL, ?, ?, ?, ?, ?)";
 			
 			
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, dto.getTitle());
-			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getOfile());
-			psmt.setString(4, dto.getSfile());
+			psmt.setString(1, dto.getUserid());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getOfile());
+			psmt.setString(5, dto.getSfile());
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("게시물 입력 중 예외 발생");
@@ -112,6 +114,7 @@ public class RecipeBoardDAO extends DBConnPool{
 			
 			if(rs.next()) { // 결과를 DTO 객체에 저장
 				dto.setIdx(rs.getString("idx"));
+				dto.setUserid(rs.getString("userid"));
 				dto.setTitle(rs.getString("title"));
 				dto.setContent(rs.getString("content"));
 				dto.setPostdate(rs.getDate("postdate"));
@@ -181,15 +184,16 @@ public class RecipeBoardDAO extends DBConnPool{
 		
 		try {
 			String query = "UPDATE recipeboard"
-						+ " SET title=?, content=?, ofile=?, sfile=? "
+						+ " SET title=?, userid=?, content=?, ofile=?, sfile=? "
 						+ " WHERE idx=?";
 			
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());
-			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getOfile());
-			psmt.setString(4, dto.getSfile());
-			psmt.setString(5, dto.getIdx());
+			psmt.setString(2, dto.getUserid());
+			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getOfile());
+			psmt.setString(5, dto.getSfile());
+			psmt.setString(6, dto.getIdx());
 			
 			result = psmt.executeUpdate();
 		} catch(Exception e) {

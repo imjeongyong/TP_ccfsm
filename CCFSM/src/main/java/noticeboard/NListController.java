@@ -1,4 +1,4 @@
-package menuboard;
+package noticeboard;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,13 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import menuboard.MenuBoardDAO;
+import menuboard.MenuBoardDTO;
 import utils.BoardPage;
 
 /**
- * Servlet implementation class ListController
+ * Servlet implementation class NListController
  */
-@WebServlet("/menuboard/list.do")
-public class MListController extends HttpServlet {
+@WebServlet("/noticeboard/list.do")
+public class NListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -27,8 +29,9 @@ public class MListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		// DAO 생성
-		MenuBoardDAO dao = new MenuBoardDAO();
+		NoticeBoardDAO dao = new NoticeBoardDAO();
 
 		// 뷰에 전달할 매개변수 저장용 맵 생성
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -62,12 +65,12 @@ public class MListController extends HttpServlet {
 
 		// 페이지 처리 end
 
-		List<MenuBoardDTO> boardLists = dao.selectListPage(map);
+		List<NoticeBoardDTO> boardLists = dao.selectListPage(map);
 		// 게시물 목록 받기
 		dao.close();
 
 		// 뷰에 전달할 매개변수 추가
-		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../menuboard/list.do");
+		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../noticeboard/list.do");
 		// 바로가기 영역 HTML 문자열
 		map.put("pagingImg", pagingImg);
 		map.put("totalCount", totalCount);
@@ -77,6 +80,6 @@ public class MListController extends HttpServlet {
 		// 전달할 데이터를 request 영역에 저장 후 List.jsp로 포워드
 		request.setAttribute("boardLists", boardLists);
 		request.setAttribute("map", map);
-		request.getRequestDispatcher("/MenuBoard/List.jsp").forward(request, response);
+		request.getRequestDispatcher("/NoticeBoard/List.jsp").forward(request, response);
 	}
 }

@@ -17,7 +17,7 @@
 		</header>
 		<section>
 			<nav>
-				<h3>사이드바 페이지 인클루드</h3>
+			<jsp:include page="/Navigator/Experience.jsp" />
 			</nav>
 			<article>
 				<h3>체험관 소개글~~~~~~</h3>

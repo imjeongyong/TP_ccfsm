@@ -1,14 +1,15 @@
-package menuboard;
+package noticeboard;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
 import common.DBConnPool;
+import menuboard.MenuBoardDTO;
 
-public class MenuBoardDAO extends DBConnPool {
+public class NoticeBoardDAO extends DBConnPool{
 
-	public MenuBoardDAO() {
+	public NoticeBoardDAO() {
 		super();
 	}
 
@@ -17,7 +18,7 @@ public class MenuBoardDAO extends DBConnPool {
 		int totalCount = 0;
 
 		// 쿼리문 준비
-		String query = "SELECT COUNT(*) FROM menuboard";
+		String query = "SELECT COUNT(*) FROM noticeboard";
 		// 검색 조건이 있다면 WHERE절로 추가
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField") + " " + " LIKE '%" + map.get("searchWord") + "%'";
@@ -31,16 +32,15 @@ public class MenuBoardDAO extends DBConnPool {
 			System.out.println("게시물 카운트 중 예외 발생");
 			e.printStackTrace();
 		}
-
 		return totalCount; // 게시물 개수를 서플릿으로 반환
 	}
 
 	// 검색 조건에 맞는 게시물 목록을 반환합니다(페이징 기능 지원).
-	public List<MenuBoardDTO> selectListPage(Map<String, Object> map) {
-		List<MenuBoardDTO> board = new Vector<MenuBoardDTO>();
+	public List<NoticeBoardDTO> selectListPage(Map<String, Object> map) {
+		List<NoticeBoardDTO> board = new Vector<NoticeBoardDTO>();
 
 		// 쿼리문 준비
-		String query = " " + " SELECT * FROM ( " + " SELECT Tb.*, ROWNUM rNum FROM ( " + " SELECT * FROM menuboard ";
+		String query = " " + " SELECT * FROM ( " + " SELECT Tb.*, ROWNUM rNum FROM ( " + " SELECT * FROM noticeboard ";
 		// 검색 조건이 있다면 WHERE절로 추가
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%'";
@@ -58,7 +58,7 @@ public class MenuBoardDAO extends DBConnPool {
 
 			while (rs.next()) {
 
-				MenuBoardDTO dto = new MenuBoardDTO();
+				NoticeBoardDTO dto = new NoticeBoardDTO();
 
 				dto.setIdx(rs.getString("idx"));
 				dto.setUserid(rs.getString("userid"));
@@ -79,11 +79,11 @@ public class MenuBoardDAO extends DBConnPool {
 		return board; // 목록 반환
 	}
 
-	public int insertWrite(MenuBoardDTO dto) {
+	public int insertWrite(NoticeBoardDTO dto) {
 		int result = 0;
 
 		try {
-			String query = "INSERT INTO menuboard ( " + " idx, userid, title, content, ofile, sfile) " + " VALUES (  "
+			String query = "INSERT INTO noticeboard ( " + " idx, userid, title, content, ofile, sfile) " + " VALUES (  "
 					+ " seq_board_num.NEXTVAL, ?, ?, ?, ?, ?)";
 			
 			
@@ -102,9 +102,9 @@ public class MenuBoardDAO extends DBConnPool {
 	}
 	
 	// 주어진 일련번호에 해당하는 게시물을 DTO에 담아 반환합니다.
-	public MenuBoardDTO selectView(String idx) {
-		MenuBoardDTO dto = new MenuBoardDTO(); // DTO 객체 생성
-		String query = "SELECT * FROM menuboard WHERE idx=?"; // 쿼리문 템플릿 준비
+	public NoticeBoardDTO selectView(String idx) {
+		NoticeBoardDTO dto = new NoticeBoardDTO(); // DTO 객체 생성
+		String query = "SELECT * FROM noticeboard WHERE idx=?"; // 쿼리문 템플릿 준비
 		try {
 			psmt = con.prepareStatement(query); // 쿼리문 준비
 			psmt.setString(1, idx); // 인파라미터 설정
@@ -130,7 +130,7 @@ public class MenuBoardDAO extends DBConnPool {
 	
 	// 주어진 일련번호에 해당하는 게시물의 조회수를 1 증가시킵니다.
 	public void updateVisitCount(String idx) {
-		String query = "UPDATE menuboard SET "
+		String query = "UPDATE noticeboard SET "
 					+ " visitcount=visitcount+1 "
 					+ " WHERE idx=?";
 		
@@ -146,7 +146,7 @@ public class MenuBoardDAO extends DBConnPool {
 	
 	// 다운로드 횟수를 1 증가시킵니다.
 	public void downCountPlus(String idx) {
-		String sql = "UPDATE menuboard SET "
+		String sql = "UPDATE noticeboard SET "
 					+ " downcount=downcount+1 "
 					+ " WHERE idx=?";
 		
@@ -164,7 +164,7 @@ public class MenuBoardDAO extends DBConnPool {
 		int result = 0;
 		
 		try {
-			String query = "DELETE FROM menuboard WHERE idx=?";
+			String query = "DELETE FROM noticeboard WHERE idx=?";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, idx);
 			result = psmt.executeUpdate();
@@ -176,11 +176,11 @@ public class MenuBoardDAO extends DBConnPool {
 	}
 	
 	// 게시글 데이터를 받아 DB에 저장되어 있던 내용을 갱신합니다(파일 업로드 지원).
-	public int updatePost(MenuBoardDTO dto) {
+	public int updatePost(NoticeBoardDTO dto) {
 		int result = 0;
 		
 		try {
-			String query = "UPDATE menuboard"
+			String query = "UPDATE noticeboard"
 						+ " SET title=?, userid=?, content=?, ofile=?, sfile=? "
 						+ " WHERE idx=?";
 			

@@ -41,7 +41,7 @@
 <div class="dropdown">
 	<button class="dropbtn">알림마당</button>
 	<div class="dropdown-content">
-		<a href="${pageContext.request.contextPath}/Notice/Notice.jsp">공지사항</a> 
+		<a href="${pageContext.request.contextPath}/noticeboard/list.do">공지사항</a> 
 		<a href="${pageContext.request.contextPath}/QnA/QnA.jsp">질문 게시판</a> 
 		<a href="${pageContext.request.contextPath}/PhotoBoard/PhotoBoard.jsp">포토 갤러리</a>
 	</div>

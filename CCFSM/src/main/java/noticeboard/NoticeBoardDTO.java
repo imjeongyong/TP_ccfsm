@@ -1,6 +1,6 @@
-package recipeboard;
+package noticeboard;
 
-public class RecipeBoardDTO {
+public class NoticeBoardDTO {
 
 	private String idx;
 	private String userid;
@@ -19,7 +19,7 @@ public class RecipeBoardDTO {
 	public void setIdx(String idx) {
 		this.idx = idx;
 	}
-	
+
 	public String getUserid() {
 		return userid;
 	}

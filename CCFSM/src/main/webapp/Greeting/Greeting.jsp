@@ -17,10 +17,10 @@
 		</header>
 		<section>
 			<nav>
-				<h3>사이드바 페이지 인클루드</h3>
+				<jsp:include page="../Navigator/Greeting.jsp" />
 			</nav>
 			<article>
-				<h3>반갑습니다~~~~~~~~~~</h3>
+				
 			</article>
 			<aside>
 				<h3>칸 떼우기 사진</h3>

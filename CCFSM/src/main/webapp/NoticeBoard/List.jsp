@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>레시피</title>
+<title>공지사항</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Resources/layout.css">
 <jsp:include page="/Frame/Header1.jsp" />
@@ -17,10 +17,10 @@
 		</header>
 		<section>
 			<nav>
-				<jsp:include page="/Navigator/Board.jsp" />
+				<jsp:include page="/Navigator/Notice.jsp" />
 			</nav>
 			<article>
-			<h2>레시피</h2>
+			<h2>공지사항</h2>
 				<!-- 검색 폼 -->
 				<form method="get">
 					<table border="1" width="90%">
@@ -60,7 +60,7 @@
 									</td>
 									<td align="left">
 										<!-- 제목(링크) --> <a
-										href="../recipeboard/view.do?idx=${ row.idx }">${ row.title }</a>
+										href="../noticeboard/view.do?idx=${ row.idx }">${ row.title }</a>
 									</td>
 									<td>${row.userid }</td>
 									<!-- 작성자 -->
@@ -71,7 +71,7 @@
 									<td>
 										<!-- 첨부 파일 --> <c:if test="${ not empty row.ofile }">
 											<a
-												href="../recipeboard/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[Down]</a>
+												href="../menuboard/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[Down]</a>
 										</c:if>
 									</td>
 								</tr>
@@ -84,22 +84,24 @@
 				<table border="1" width="90%">
 					<tr align="center">
 						<td>${ map.pagingImg }</td>
+						<td width="100">
+						
 						<c:set var="isAdmin" value="admin" />
 						<c:if test="${sessionScope.UserId eq isAdmin }">
-						<td width="100"><button type="button"
-								onclick="location.href='../recipeboard/write.do';">글쓰기</button></td>
-						</c:if>		
+							<button type="button"
+								onclick="location.href='../noticeboard/write.do';">글쓰기</button>
+						</c:if>
+						</td>
 					</tr>
 				</table>
 			</article>
 			<aside>
-				<h3>칸 떼우기 사진</h3>
+				<h3>사<br />이<br />드<br />바<br /></h3>
 			</aside>
 		</section>
 		<footer>
 			<h3>푸터</h3>
 		</footer>
 	</div>
-
 </body>
 </html>

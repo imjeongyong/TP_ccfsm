@@ -17,7 +17,7 @@
 		</header>
 		<section>
 			<nav>
-				<h3>사이드바 페이지 인클루드</h3>
+				<jsp:include page="../Navigator/Greeting.jsp" />
 			</nav>
 			<article>
 				<h3>오시는길</h3>
