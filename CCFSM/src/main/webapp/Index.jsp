@@ -6,28 +6,23 @@
 <meta charset="UTF-8">
 <title>분당구 어린이 급식지원 관리 센터</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/Resources/layout.css">
-<jsp:include page="/Frame/Header1.jsp" />
+	href="${pageContext.request.contextPath}/Resources/Style.css">
+<jsp:include page="/Frame/Header.jsp" />
 </head>
 <body>
+	<jsp:include page="/Frame/HeadNav.jsp" />
+	<header class="bg"
+		style="background-image: url('${pageContext.request.contextPath}/Resources/Images/img1.jpg'); background-size: cover;">
+		<div class="container">
+			<!-- 헤더 내용 -->
+		</div>
+	</header>
 	<div class="container">
-		<header>
-			<jsp:include page="/Frame/MenuTab.jsp" />
-		</header>
-		<section>
-			<nav>
-				<h3>사이드바 페이지 인클루드</h3>
-			</nav>
-			<article>
-				<h3>메인 페이지 인클루드</h3>
-			</article>
-			<aside>
-				<h3>사<br />이<br />드<br />바<br /></h3>
-			</aside>
-		</section>
-		<footer>
-			<h3>푸터</h3>
-		</footer>
+		<aside>
+		</aside>
+		<article>
+		</article>
 	</div>
+	<jsp:include page="/Frame/Footer.jsp" />
 </body>
 </html>

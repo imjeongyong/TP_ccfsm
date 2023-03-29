@@ -18,7 +18,7 @@ if (memberDTO.getId() != null) {
 	response.sendRedirect("../Index.jsp");
 } else {
 	// 로그인 실패
-	request.setAttribute("LoginErrMsg", "로그인 오류입니다.");
+	request.setAttribute("LoginErrMsg", "아이디 또는 비밀번호를 확인해주세요.");
 	request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
 }
 %>
