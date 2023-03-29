@@ -7,83 +7,103 @@
 <meta charset="UTF-8">
 <title>식단표</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/Resources/layout.css">
-<jsp:include page="/Frame/Header1.jsp" />
+	href="${pageContext.request.contextPath}/Resources/Style.css">
+<jsp:include page="/Frame/Header.jsp" />
 </head>
 <body>
+	<jsp:include page="/Frame/HeadNav.jsp" />
+	<header class="bg"
+		style="background-image: url('${pageContext.request.contextPath}/Resources/Images/img1.jpg'); background-size: cover;">
+		<div class="container">
+			<!-- 헤더 내용 -->
+		</div>
+	</header>
 	<div class="container">
-		<header>
-			<jsp:include page="/Frame/MenuTab.jsp" />
-		</header>
-		<section>
-			<nav>
-				<jsp:include page="/Navigator/Board.jsp" />
-			</nav>
-			<article>
-				<h2>식단표 상세보기</h2>
-				<table border="1" width="90%">
+		<aside>
+			<jsp:include page="/Navigator/Board.jsp" />
+		</aside>
+		<article>
+			<h1 class="display-6 m-2 p-2 bg-danger-subtle" style="text-align: center;">식단표 보기</h1>
+			<div class="table-responsive">
+				<table class="table table-bordered p-5 m-5" style="width: 90%">
 					<colgroup>
 						<col width="15%" />
 						<col width="35%" />
 						<col width="15%" />
-						<col width="*" />
+						<col />
 					</colgroup>
-
 					<!-- 게시글 정보 -->
 					<tr>
-						<td>번호</td>
-						<td>${dto.idx }</td>
-						<td>작성자</td>
-						<td>${dto.userid }</td>
+						<th scope="row">번호</th>
+						<td>${dto.idx}</td>
+						<th scope="row">작성자</th>
+						<td>${dto.userid}</td>
 					</tr>
 					<tr>
-						<td>작성일</td>
-						<td>${dto.postdate }</td>
-						<td>조회수</td>
-						<td>${dto.visitcount }</td>
+						<th scope="row">작성일</th>
+						<td>${dto.postdate}</td>
+						<th scope="row">조회수</th>
+						<td>${dto.visitcount}</td>
 					</tr>
 					<tr>
-						<td>내용</td>
-						<td colspan="3" height="100">${dto.content }</td>
+						<th scope="row">내용</th>
+						<td colspan="3" height="100">${dto.content}</td>
 					</tr>
 
 					<!-- 첨부파일 -->
 					<tr>
-						<td>첨부파일</td>
-						<td><c:if test="${not empty dto.ofile }">
-				${dto.ofile }
-				<a
-									href="../menuboard/download.do?ofile=${dto.ofile}&sfile=${dto.sfile }&idx=${dto.idx }">[다운로드]</a>
+						<th scope="row">첨부파일</th>
+						<td><c:if test="${not empty dto.ofile}">${dto.ofile}
+ 							    <a class="BoardFile"
+									href="../menuboard/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}&idx=${dto.idx}">[다운로드]</a>
 							</c:if></td>
-						<td>다운로드수</td>
-						<td>${dto.downcount }</td>
+						<th scope="row">다운로드수</th>
+						<td>${dto.downcount}</td>
 					</tr>
-					<!-- 하단 메뉴(버튼) -->
+
 					<tr>
-						<td colspan="4" align="center">
-						<c:set var="isAdmin" value="admin" /> 
-						<c:if test="${sessionScope.UserId eq isAdmin }">
-								<button type="button"
-									onclick="location.href='../menuboard/edit.do?idx=${param.idx }';">
-									수정하기</button>
-								<button type="button"
-									onclick="location.href='../menuboard/delete.do?idx=${param.idx}';">
-									삭제하기</button>
-						</c:if>
-						<button type="button"
-							onclick="location.href='../menuboard/list.do';">목록 바로가기</button>
-						</td>
+						<td colspan="4" class="text-center">
+							<c:set var="isAdmin" value="admin" /> 
+							<c:if test="${sessionScope.UserId eq isAdmin}">
+								<button type="button" class="btn btn-warning"
+									onclick="location.href='../menuboard/edit.do?idx=${param.idx}';">
+									수정하기
+								</button>
+								<!-- 모달 버튼 -->
+								<button type="button" class="btn btn-warning"
+									data-bs-toggle="modal" data-bs-target="#confirmModal">삭제하기</button>
+
+								<!-- 모달 -->
+								<div class="modal fade" id="confirmModal" tabindex="-1"
+									aria-labelledby="confirmModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="confirmModalLabel">삭제 확인</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">정말로 삭제하시겠습니까?</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">취소</button>
+												<button type="button" class="btn btn-danger"
+													onclick="location.href='../menuboard/delete.do?idx=${param.idx}';">확인</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:if>
+							<button type="button" class="btn btn-warning"
+								onclick="location.href='../menuboard/list.do';">목록 바로가기
+							</button></td>
 					</tr>
 				</table>
-			</article>
-			<aside>
-				<h3>칸 떼우기 사진</h3>
-			</aside>
-		</section>
-		<footer>
-			<h3>푸터</h3>
-		</footer>
+			</div>
+		</article>
 	</div>
-
+	<footer>
+		<jsp:include page="/Frame/Footer.jsp" />
+	</footer>
 </body>
 </html>

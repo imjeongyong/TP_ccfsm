@@ -5,7 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 게시글 수정</title>
+<title>공지사항 게시글 수정하기</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Resources/Style.css">
+<jsp:include page="/Frame/Header.jsp" />
 <script type="text/javascript">
 	function validateForm(form) {
 		if (form.title.value == "") {
@@ -20,69 +23,64 @@
 		}
 	}
 </script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/Resources/layout.css">
-<jsp:include page="/Frame/Header1.jsp" />
+<style>
+.write-form {
+	width: 75%;
+}
+</style>
 </head>
 <body>
+	<jsp:include page="/Frame/HeadNav.jsp" />
+	<header class="bg"
+		style="background-image: url('${pageContext.request.contextPath}/Resources/Images/img1.jpg'); background-size: cover;">
+		<div class="container">
+			<!-- 헤더 내용 -->
+		</div>
+	</header>
 	<div class="container">
-		<header>
-			<jsp:include page="/Frame/MenuTab.jsp" />
-		</header>
-		<section>
-			<nav>
-				<jsp:include page="/Navigator/Notice.jsp" />
-			</nav>
-			<article>
-				<h2>공지사항 게시글 수정하기</h2>
-				<form name="writeFrm" method="post" enctype="multipart/form-data"
-					action="../noticeboard/edit.do"
-					onsubmit="return validateForm(this);">
-					<input type="hidden" name="idx" value="${dto.idx }" /> <input
-						type="hidden" name="prevOfile" value="${dto.ofile }" /> <input
-						type="hidden" name="prevSfile" value="${dto.sfile }" />
-					<table border="1" width="90%">
-						<tr>
-							<td>작성자</td>
-							<td><input type="hidden" name="userid"
-								value="${dto.userid }" style="width: 150px;" /></td>
-						</tr>
-						<tr>
-							<td>제목</td>
-							<td><input type="text" name="title" style="width: 90%"
-								value="${dto.title }" /></td>
-						</tr>
-						<tr>
-							<td>내용</td>
-							<td><textarea name="content"
-									style="width: 90%; height: 100px;">${dto.content } </textarea>
-							</td>
-						</tr>
-						<tr>
-							<td>첨부 파일</td>
-							<td><input type="file" name="ofile" /></td>
-						</tr>
-						<tr>
-							<td colspan="2" align="center">
-								<button type="submit">작성 완료</button>
-								<button type="reset">RESET</button>
-								<button type="button"
-									onclick="location.href='../noticeboard/list.do';">목록
-									바로가기</button>
-							</td>
-						</tr>
-					</table>
-				</form>
-			</article>
-			<aside>
-				<h3>
-					사<br />이<br />드<br />바<br />
-				</h3>
-			</aside>
-		</section>
-		<footer>
-			<h3>푸터</h3>
-		</footer>
+		<aside>
+			<jsp:include page="/Navigator/Notice.jsp" />
+		</aside>
+		<article>
+			<h1 class="display-6 m-2 p-2 bg-danger-subtle" style="text-align: center;">공지사항 게시글 수정하기</h1>
+			<form name="writeFrm" method="post" enctype="multipart/form-data"
+				action="../noticeboard/edit.do" onsubmit="return validateForm(this);">
+				<input type="hidden" name="idx" value="${dto.idx }" /> 
+				<input type="hidden" name="prevOfile" value="${dto.ofile }" /> 
+				<input type="hidden" name="prevSfile" value="${dto.sfile }" />
+				<div class="row justify-content-center">
+					<div class="col-md-8">
+						<div class="mb-3">
+							<input type="hidden" name="userid"
+								value="${sessionScope.UserId }" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="title" class="form-label">제목</label> 
+							<input type="text" name="title" class="form-control" id="title"
+								value="${dto.title }">
+						</div>
+						<div class="mb-3">
+							<label for="content" class="form-label">내용</label>
+							<textarea name="content" class="form-control" id="content"
+								rows="5" required>${dto.content }</textarea>
+						</div>
+						<div class="mb-3">
+							<label for="content" class="form-label">첨부 파일</label>
+							<input type="file" name="ofile" class="form-control" id="ofile">
+						</div>
+						<div class="mb-3 text-center">
+							<button type="submit" class="btn btn-warning">작성 완료</button>
+							<button type="reset" class="btn btn-warning">RESET</button>
+							<button type="button" class="btn btn-warning"
+								onclick="location.href='../noticeboard/list.do';">목록 바로가기</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</article>
 	</div>
+	<footer>
+		<jsp:include page="/Frame/Footer.jsp" />
+	</footer>
 </body>
 </html>

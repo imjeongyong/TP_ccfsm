@@ -54,40 +54,40 @@ public class MWriteController extends HttpServlet {
 			JSFunction.alertLocation(response, "첨부 파일이 제한 용량을 초과합니다.", "../menuboard/write.do");
 			return;
 		}
-		
+
 		// 2. 파일 업로드 외 처리 ===========================
 		// 폼값을 DTO에 저장
 		MenuBoardDTO dto = new MenuBoardDTO();
 		dto.setTitle(mr.getParameter("title"));
 		dto.setUserid(mr.getParameter("userid"));
 		dto.setContent(mr.getParameter("content"));
-		
+
 		// 원본 파일명과 저장된 파일 이름 설정
 		String fileName = mr.getFilesystemName("ofile");
-		if(fileName != null) {
+		if (fileName != null) {
 			// 첨부 파일이 있을 경우 파일명 변경
-			
+
 			// 새로운 파일명 생성
 			String now = new SimpleDateFormat("yyyyMMdd_HmsS").format(new Date());
 			String ext = fileName.substring(fileName.lastIndexOf("."));
 			String newFileName = now + ext;
-			
+
 			// 파일명 변경
 			File oldFile = new File(saveDirectory + File.separator + fileName);
 			File newFile = new File(saveDirectory + File.separator + newFileName);
 			oldFile.renameTo(newFile);
-			
+
 			dto.setOfile(fileName);
 			dto.setSfile(newFileName);
 		}
-		
+
 		// DAO를 통해 DB에 게시 내용 저장
 		MenuBoardDAO dao = new MenuBoardDAO();
 		int result = dao.insertWrite(dto);
 		dao.close();
-		
+
 		// 성공 or 실패?
-		if(result == 1) { // 글쓰기 성공
+		if (result == 1) { // 글쓰기 성공
 			response.sendRedirect("../menuboard/list.do");
 		} else { // 글쓰기 실패
 			response.sendRedirect("../menuboard/write.do");

@@ -79,5 +79,4 @@ public class RListController extends HttpServlet {
 		request.setAttribute("map", map);
 		request.getRequestDispatcher("/RecipeBoard/List.jsp").forward(request, response);
 	}
-
 }

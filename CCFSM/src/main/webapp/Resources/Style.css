@@ -93,3 +93,14 @@ footer {
 	margin-bottom: 20px;
 	text-align: center;
 }
+
+/* 게시판 a태그 처리 */
+.BoardTitle {
+	text-decoration: none;
+	color: black;
+}
+
+.BoardFile {
+	text-decoration: none;
+	color: #0404B4;
+}

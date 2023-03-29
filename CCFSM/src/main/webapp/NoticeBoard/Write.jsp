@@ -5,79 +5,59 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 작성</title>
-<script type="text/javascript">
-	function validateForm(form) {
-		if (form.title.value == "") {
-			alert("제목을 입력하세요.");
-			form.title.focus();
-			return false;
-		}
-		if (form.content.value == "") {
-			alert("내용을 입력하세요.");
-			form.content.focus();
-			return false;
-		}
-	}
-</script>
+<title>공지사항 작성하기</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/Resources/layout.css">
-<jsp:include page="/Frame/Header1.jsp" />
+	href="${pageContext.request.contextPath}/Resources/Style.css">
+<jsp:include page="/Frame/Header.jsp" />
 </head>
 <body>
+	<jsp:include page="/Frame/HeadNav.jsp" />
+	<header class="bg"
+		style="background-image: url('${pageContext.request.contextPath}/Resources/Images/img1.jpg'); background-size: cover;">
+		<div class="container">
+			<!-- 헤더 내용 -->
+		</div>
+	</header>
 	<div class="container">
-		<header>
-			<jsp:include page="/Frame/MenuTab.jsp" />
-		</header>
-		<section>
-			<nav>
-				<jsp:include page="/Navigator/Board.jsp" />
-			</nav>
-			<article>
-				<h2>공지사항 작성하기</h2>
-				<form name="writeForm" method="post" enctype="multipart/form-data"
-					action="../noticeboard/write.do"
-					onsubmit="return validateForm(this);">
-
-					<table border="1" width="90%">
-						<tr>
-							<td>작성자</td>
-							<td><input type="hidden" name="userid"
-								value="${sessionScope.UserId }" style="width: 90%;" /></td>
-						</tr>
-						<tr>
-							<td>제목</td>
-							<td><input type="text" name="title" style="width: 90%;" /></td>
-						</tr>
-						<tr>
-							<td>내용</td>
-							<td><textarea name="content"
-									style="width: 90%; height: 100px;"></textarea></td>
-						</tr>
-						<tr>
-							<td>첨부 파일</td>
-							<td><input type="file" name="ofile" /></td>
-						</tr>
-						<tr>
-							<td colspan="2" align="center">
-								<button type="submit">작성 완료</button>
-								<button type="reset">RESET</button>
-								<button type="button"
-									onclick="location.href='../noticeboard/list.do';">목록
-									바로가기</button>
-							</td>
-						</tr>
-					</table>
-				</form>
-			</article>
-			<aside>
-				<h3>칸 떼우기 사진</h3>
-			</aside>
-		</section>
-		<footer>
-			<h3>푸터</h3>
-		</footer>
+		<aside>
+			<jsp:include page="/Navigator/Notice.jsp" />
+		</aside>
+		<article>
+			<h1 class="display-6 m-2 p-2 bg-danger-subtle" style="text-align: center;">공지사항 작성</h1>
+			<form name="writeForm" method="post" enctype="multipart/form-data"
+				action="../noticeboard/write.do" onsubmit="return validateForm(this);">
+				<div class="row justify-content-center">
+					<div class="col-md-8">
+						<div class="mb-3">
+							<input type="hidden" name="userid"
+								value="${sessionScope.UserId }" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="title" class="form-label">제목</label> 
+							<input type="text" name="title" class="form-control" id="title" required>
+						</div>
+						<div class="mb-3">
+							<label for="content" class="form-label">내용</label>
+							<textarea name="content" class="form-control" id="content"
+								rows="5" required></textarea>
+						</div>
+						<div class="mb-3">
+							<label for="ofile" class="form-label">첨부 파일</label> 
+							<input type="file" name="ofile" class="form-control" id="ofile">
+						</div>
+						<div class="mb-3 text-center">
+							<button type="submit" class="btn btn-warning">작성 완료</button>
+							<button type="reset" class="btn btn-warning">RESET</button>
+							<button type="button" class="btn btn-warning"
+								onclick="location.href='../noticeboard/list.do';">목록 바로가기</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</article>
 	</div>
-
+	<footer>
+		<jsp:include page="/Frame/Footer.jsp" />
+	</footer>
 </body>
 </html>
