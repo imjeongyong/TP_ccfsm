@@ -9,12 +9,17 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
-	<footer class="bg-black">
+	<footer class="bg-black" id="myFooter">
 		<div class="row">
-			<div class="col text-center">
-				<h1 class="text-white font-weight-light p-3">Footer 영역</h1>
+			<div class="col text-center mt-2" style="font-size: 0.65em">
+				<p style="color: white;">
+					© 2023 Green Company. All rights reserved.<br> 어린이 급식 지원 센터 ☎:
+					(03) 1588- 1588 | Email: info@greenacademy.com <br> Terms of
+					Use | Privacy Policy | Accessibility Statement
+				</p>
 			</div>
 		</div>
 	</footer>

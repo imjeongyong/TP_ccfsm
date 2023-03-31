@@ -18,11 +18,11 @@
 		</div>
 	</header>
 	<div class="container">
-		<aside>
-		</aside>
-		<article>
-		</article>
+		<aside></aside>
+		<article></article>
 	</div>
-	<jsp:include page="/Frame/Footer.jsp" />
+	<footer>
+		<jsp:include page="/Frame/Footer.jsp" />
+	</footer>
 </body>
 </html>

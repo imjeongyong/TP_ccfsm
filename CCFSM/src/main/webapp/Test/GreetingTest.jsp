@@ -5,13 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>인사말</title>
-<link href="${pageContext.request.contextPath}/Resources/Style.css"
-	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Resources/Style.css">
 <jsp:include page="/Frame/Header.jsp" />
 <style>
 .picture-1 {
@@ -45,13 +40,13 @@
 				<h1 class="display-6 m-2 p-2 bg-danger-subtle"
 					style="text-align: center;">인 사 말</h1>
 				&nbsp;&nbsp;&nbsp;&nbsp;<img class="picture"
-					src="${pageContext.request.contextPath}/Resources/Images/gr2.jpg"
+					src="${pageContext.request.contextPath}/Resources/Images/child.jpg"
 					alt="어린이급식지원센터" style="width: 30%; height: 30%;"><br>
 				<p style="font-size: 1.4em; color: #ff3300;">&nbsp;&nbsp;&nbsp;어린이
 					급식 지원 센터는</p>
 				<div class="picture-1">
 					<img class="picture-1"
-						src="${pageContext.request.contextPath}/Resources/Images/gr1.jpg"
+						src="${pageContext.request.contextPath}/Resources/Images/image3.jpg"
 						alt="어린이급식지원센터" style="width: 70%;">
 					<p class="picture-1_text" style="text-align: left;">
 						&nbsp;관내의 100명 미만의 어린이 급식소(어린이집, 유치원, 지역아동센터, 장애인복지시설 등)를 대상으로
@@ -76,9 +71,11 @@
 			</div>
 
 		</article>
+
 	</div>
 	<footer>
 		<jsp:include page="/Frame/Footer.jsp" />
 	</footer>
 </body>
+
 </html>

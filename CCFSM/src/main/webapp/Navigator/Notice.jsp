@@ -33,7 +33,7 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" style="text-align: right"
-						href="#">
+						href="${pageContext.request.contextPath}/qnaboard/list.do">
 							질문 게시판
 					</a>
 				</li>

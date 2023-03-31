@@ -25,7 +25,7 @@
 </style>
 <nav class="navbar navbar-expand-lg bg-body-tertiary mt-0">
 	<div class="container mb-0">
-		<a class="navbar-brand" href="#"> 
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/Index.jsp"> 
 		<img src="${pageContext.request.contextPath}/Resources/Images/icon1.jpg"
 			alt="HOME" width="40" height="34">
 		</a>
@@ -103,7 +103,7 @@
 							<a class="dropdown-item" href="${pageContext.request.contextPath}/noticeboard/list.do">공지사항</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/QnA/QnA.jsp">질문 게시판</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/qnaboard/list.do">질문 게시판</a>
 						</li>
 						<li>
 							<a class="dropdown-item" href="${pageContext.request.contextPath}/PhotoBoard/PhotoBoard.jsp">포토 갤러리</a>
