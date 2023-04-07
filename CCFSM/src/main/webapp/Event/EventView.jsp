@@ -11,10 +11,8 @@
 </head>
 <body>
 	<jsp:include page="/Frame/HeadNav.jsp" />
-	<header class="bg" style="background-image: url('${pageContext.request.contextPath}/Resources/Images/img1.jpg'); background-size: cover;">
-		<div class="container">
-			<!-- 헤더 내용 -->
-		</div>
+	<header>
+		<img src="${pageContext.request.contextPath}/Resources/Images/img1.jpg" style="height: 100%; width: 100%">
 	</header>
 	<div class="container">
 		<aside>
@@ -50,19 +48,12 @@
 
 					<!-- 신청하기 -->
 					<tr>
-						<th scope="row">현재 인원</th>
-							<td>${dto.capa - dto.rest } / ${dto.capa }</td>
+						<th scope="row">모집 인원</th>
+							<td>${dto.capa } 명</td>
 						<th scope="row">체험관 신청</th>
 							<td>
-								<c:choose>
-									<c:when test="${dto.rest eq 0 }">
-										체험관 신청 마감
-									</c:when>
-									<c:otherwise>
-										<button type="button" class="btn btn-warning"
-											onclick="location.href='../event/apply.do?idx=${dto.idx }&userid=${sessionScope.UserId }';">신청하기</button>
-									</c:otherwise>
-								</c:choose>										
+								<button type="button" class="btn btn-warning"
+								onclick="location.href='../event/apply.do?idx=${dto.idx }&userid=${sessionScope.UserId }';">신청하기</button>	
 							</td>
 					</tr>
 

@@ -49,11 +49,8 @@
 </head>
 <body>
 	<jsp:include page="/Frame/HeadNav.jsp" />
-	<header class="bg"
-		style="background-image: url('${pageContext.request.contextPath}/Resources/Images/img1.jpg'); background-size: cover;">
-		<div class="container">
-			<!-- 헤더 내용 -->
-		</div>
+	<header>
+		<img src="${pageContext.request.contextPath}/Resources/Images/img1.jpg" style="height: 100%; width: 100%">
 	</header>
 	<div class="container">
 		<aside>

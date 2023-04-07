@@ -27,10 +27,10 @@
 				<form action="../event/apply.do" method="post">
 
 					<div class="mb-3">
+						<!-- 이벤트 인덱스 -->
 						<input type="hidden" class="form-control" name="idx" value="${edto.idx }">
-						<input type="hidden" class="form-control" name="event_title" value="${edto.title }">
+						<!-- 회원 id -->
 						<input type="hidden" class="form-control" name="userid" value="${mdto.id }">
-						<input type="hidden" class="form-control" name="apply_state" value="${mdto.apply_state }">
 					</div>
 					<div class="mb-3">
 						<label for="event_detail" class="form-label">행사 소개</label>

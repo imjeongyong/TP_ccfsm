@@ -43,11 +43,10 @@ public class InPutController extends HttpServlet {
 		dto.setStart_date(start_date);
 		dto.setEnd_date(end_date);
 		dto.setCapa(request.getParameter("capa"));
-		dto.setRest(request.getParameter("rest"));		
 		
 		// 저장한 데이터를 DB에 insert
 		EventDAO dao = new EventDAO();
-		dao.insetEvent(dto);
+		dao.insertEvent(dto);
 
 		request.getRequestDispatcher("../event/view.do").forward(request, response);
 	}

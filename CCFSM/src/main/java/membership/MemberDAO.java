@@ -89,7 +89,7 @@ public class MemberDAO extends DBConnPool {
 			if(rs.next()) {
 				dto.setId(rs.getString("id"));
 				dto.setName(rs.getString("name"));
-				dto.setApply(rs.getString("apply"));
+				dto.setApply_event(rs.getString("apply_event"));
 				dto.setApply_state(rs.getString("apply_state"));
 			} 
 			
@@ -100,10 +100,9 @@ public class MemberDAO extends DBConnPool {
 		return dto;
 	}
 	
-	// member table update(apply->행사명, apply_state->대기)
+	// member table update(apply_event->행사명, apply_state->대기)
 	public void applyEvent(String event_name, String userid) {
-		String query = "update member set apply=?, apply_state='대기' where id=?";
-		System.out.println(query);
+		String query = "update member set apply_event=?, apply_state='대기' where id=?";
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, event_name);
@@ -112,6 +111,20 @@ public class MemberDAO extends DBConnPool {
 			rs.next();
 		} catch (Exception e) {
 			System.out.println("체험관 신청 중 예외 발생");
+			e.printStackTrace();
+		}
+	}
+	
+	// member table update(apply_state: 대기->승인)
+	public void apply_update(String applicant_id) {
+		String query = "update member set apply_state='완료' where id=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, applicant_id);
+			rs = psmt.executeQuery();
+			rs.next();
+		} catch(Exception e) {
+			System.out.println("member table에서 apply_state 업데이트중 예외 발생");
 			e.printStackTrace();
 		}
 	}

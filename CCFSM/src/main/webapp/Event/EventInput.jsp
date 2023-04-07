@@ -10,8 +10,7 @@
 	href="${pageContext.request.contextPath}/Resources/Style.css">
 <jsp:include page="/Frame/Header.jsp" />
 
-<link rel="stylesheet" 
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
 
 </head>
 <body>
@@ -24,8 +23,9 @@
 			<jsp:include page="/Navigator/Event.jsp" />
 		</aside>
 		<article>
-			<h1 class="display-6 m-2 p-2 bg-danger-subtle"
-				style="text-align: center;">체험관 행사 입력</h1>
+			<h1 class="display-6 m-2 p-2 bg-danger-subtle" style="text-align: center;">
+				체험관 행사 등록
+			</h1>
 
 			<div class="m-2 p-2">
 				<form action="../event/input.do" method="post">
@@ -38,11 +38,11 @@
 						<input type="text" class="form-control" id="content" name="content" required>
 					</div>
 					<div class="mb-3">
-						<label for="start_date" class="form-label">시작</label> 
+						<label for="start_date" class="form-label">행사 시작</label> 
 						<input type="datetime-local" class="form-control" id="start_date" name="start_date" required>
 					</div>
 					<div class="mb-3">
-						<label for="end_date" class="form-label">종료</label> 
+						<label for="end_date" class="form-label">행사 종료</label> 
 						<input type="datetime-local" class="form-control" id="end_date" name="end_date" required>
 					</div>
 					<div class="mb-3">

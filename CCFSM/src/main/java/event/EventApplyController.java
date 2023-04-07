@@ -59,26 +59,25 @@ public class EventApplyController extends HttpServlet {
 			throws ServletException, IOException {
 
 		// 데이터 전달받기
-		String idx = request.getParameter("idx");
-		String event_title = request.getParameter("event_title");
+		String event_idx = request.getParameter("idx");
 		String userid = request.getParameter("userid");
 		String center_name = request.getParameter("center_name");
 		String applicant_num = request.getParameter("applicant_num");
 		String contect_info = request.getParameter("contect_info");
-		String apply_state = request.getParameter("apply_state");
+		
+		// DB에 저장된 정보를 DTO로 받기
+		EventDAO edao = new EventDAO();
+		EventDTO edto = edao.eventView(event_idx);
+		
+		MemberDAO mdao = new MemberDAO();
+		MemberDTO mdto = mdao.searchId(userid);
 
 		// member table apply(행사 이름), apply_state update(대기)
-		MemberDAO mdao = new MemberDAO();
-		mdao.applyEvent(event_title, userid);
-		mdao.close();
-		
-		// event table rest = rest - 신청인원
-		EventDAO edao = new EventDAO();
-		edao.updateRest(applicant_num, idx);
-		
-		// event_manage table에 데이터 insert
-		EventManageDTO emdto = new EventManageDTO(idx, userid, event_title, center_name, applicant_num, contect_info, apply_state);
-		edao.insertApply(emdto);
+		mdao.applyEvent(edto.getTitle(), userid);
+		mdto = mdao.searchId(userid);
+
+		ApplyManageDTO adto = new ApplyManageDTO(edto.getTitle(), userid, center_name, applicant_num, contect_info, mdto.getApply_state());
+		edao.insertApply(adto);
 
 		response.sendRedirect("../event/view.do");
 	}

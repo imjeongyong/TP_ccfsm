@@ -11,18 +11,16 @@ public class EventDAO extends DBConnPool {
 	}
 
 	// event 테이블에 데이터 insert
-	public void insetEvent(EventDTO dto) {
-		String query = " insert into event(idx, title, content, start_date, end_date, capa, rest) "
-				+ " values(seq_board_num.nextval, ?, ?, to_date(?, 'YYYY-MM-DD HH24:MI'), to_date(?, 'YYYY-MM-DD HH24:MI'), ?, ? )";
+	public void insertEvent(EventDTO dto) {
+
+		String query = " insert into event(idx, title, content, start_date, end_date, capa, event_state, applicant_center_num) "
+				+ " values(seq_board_num.nextval, ?, ?, to_date(?, 'YYYY-MM-DD HH24:MI'), to_date(?, 'YYYY-MM-DD HH24:MI'), ?, ?, ? )";
 		
 		System.out.println("dto.getTitle()" + dto.getTitle());
 		System.out.println("dto.getContent()" + dto.getContent());
 		System.out.println("dto.getStart_date()" + dto.getStart_date());
 		System.out.println("dto.getEnd_date())" + dto.getEnd_date());
 		System.out.println("dto.getCapa()" + dto.getCapa());
-		
-		System.out.println(query);
-
 
 		try {
 			psmt = con.prepareStatement(query); // 동적 쿼리문 생성
@@ -31,7 +29,8 @@ public class EventDAO extends DBConnPool {
 			psmt.setString(3, dto.getStart_date());
 			psmt.setString(4, dto.getEnd_date());
 			psmt.setString(5, dto.getCapa());
-			psmt.setString(6, dto.getCapa());
+			psmt.setString(6, "모집중");
+			psmt.setString(7, "0");
 			
 			System.out.println("query : " + query);
 			rs = psmt.executeQuery(); // 쿼리문 실행
@@ -56,7 +55,7 @@ public class EventDAO extends DBConnPool {
 			rs = stmt.executeQuery(query);
 
 			// 반환된 게시물 목록을 List 컬렉션에 추가
-			while (rs.next()) {
+			while(rs.next()) {
 
 				EventDTO dto = new EventDTO();
 				dto.setIdx(rs.getString("idx"));
@@ -65,7 +64,8 @@ public class EventDAO extends DBConnPool {
 				dto.setStart_date(rs.getString("start_date"));
 				dto.setEnd_date(rs.getString("end_date"));
 				dto.setCapa(rs.getString("capa"));
-				dto.setRest(rs.getString("rest"));
+				dto.setEvent_state(rs.getString("event_state"));
+				dto.setApplicant_center_num(rs.getString("Applicant_center_num"));
 
 				events.add(dto);
 			}
@@ -75,6 +75,7 @@ public class EventDAO extends DBConnPool {
 		}
 		return events; // 목록 반환
 	}
+	
 	
 	// 전달받은 idx로 DB 테이블 조회, 데이터 전송
 	public EventDTO eventView(String idx) {
@@ -92,7 +93,8 @@ public class EventDAO extends DBConnPool {
 				dto.setStart_date(rs.getString("start_date"));
 				dto.setEnd_date(rs.getString("end_date"));
 				dto.setCapa(rs.getString("capa"));
-				dto.setRest(rs.getString("rest"));
+				dto.setEvent_state(rs.getString("event_state"));
+				dto.setApplicant_center_num(rs.getString("applicant_center_num"));
 			}
 		} catch (Exception e) {
 			System.out.println("게시물 상세보기 중 예외 발생");
@@ -101,45 +103,86 @@ public class EventDAO extends DBConnPool {
 		return dto; // 결과 반환
 	}
 	
-	// event table의 rest(남은인원) = rest - applicant_num(신청인원)
-	public void updateRest(String applicant_num, String idx) {
+	// apply_manager table에 데이터 insert
+	public void insertApply(ApplyManageDTO adto) {
+		String query = "insert into apply_manage(idx, event_title, applicant_id, applicant_center, applicant_num, contect_info, apply_state) "
+					 + " values(seq_board_num.nextval, ?, ?, ?, ?, ?, ?) ";
 				
-		String query = "update event set rest = rest - ? where idx=?";
-		
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, applicant_num);
-			psmt.setString(2, idx);
+			psmt.setString(1, adto.getEvent_title());
+			psmt.setString(2, adto.getApplicant_id());
+			psmt.setString(3, adto.getApplicant_center());
+			psmt.setString(4, adto.getApplicant_num());
+			psmt.setString(5, adto.getContect_info());
+			psmt.setString(6, adto.getApply_state());
 			rs = psmt.executeQuery();
 			rs.next();
 		} catch(Exception e) {
-			System.out.println("event table의 rest update중 예외 발생");
+			System.out.println("apply_manage table에 데이터 insert시 예외 발생");
 			e.printStackTrace();
 		}
 	}
 	
-	// event_manager table에 데이터 insert
-	public void insertApply(EventManageDTO emdto) {
-		//INSERT INTO event_manage(idx, userid, event_title, center_name, applicant_num, contect_info, apply_state)
-		//values(seq_board_num.nextval, '테스트유저', '테스트행사', '테스트센터', '3', '010-1234-1234', '대기')
-		
-		String query = "insert into event_manage(idx, userid, event_title, center_name, applicant_num, contect_info, apply_state) "
-					 + " values(seq_board_num.nextval, ?, ?, ?, ?, ?, ?) ";
-		
-		System.out.println("query : " + query);
+	// 테이블 데이터 반환
+	public List<ApplyManageDTO> applyList() {
+		List<ApplyManageDTO> apply_list = new Vector<ApplyManageDTO>();
+
+		// 쿼리문 준비
+		String query = "select * from apply_manage order by regidate desc";
 		
 		try {
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, emdto.getUserid());
-			psmt.setString(2, emdto.getEvent_title());
-			psmt.setString(3, emdto.getCenter_name());
-			psmt.setString(4, emdto.getApplicant_num());
-			psmt.setString(5, emdto.getContect_info());
-			psmt.setString(6, emdto.getApply_state());
+			rs = psmt.executeQuery(); // 쿼리문 실행
+
+			// 반환된 게시물 목록을 List 컬렉션에 추가
+
+			while (rs.next()) {
+
+				ApplyManageDTO dto = new ApplyManageDTO();
+
+				dto.setIdx(rs.getString("idx"));
+				dto.setEvent_title(rs.getString("event_title"));
+				dto.setApplicant_id(rs.getString("applicant_id"));
+				dto.setApplicant_center(rs.getString("applicant_center"));
+				dto.setApplicant_num(rs.getString("applicant_num"));
+				dto.setContect_info(rs.getString("contect_info"));
+				dto.setApply_state(rs.getString("apply_state"));
+				dto.setRegidate(rs.getString("regidate"));
+
+				apply_list.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println("승인할 신청 조회중 예외 발생");
+			e.printStackTrace();
+		}
+		return apply_list; // 목록 반환
+	}
+	
+	// event table update(event_state: 모집중->모집완료)
+	public void state_update(String event_title) {
+		String query = "update event set event_state='모집완료' where title=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, event_title);
 			rs = psmt.executeQuery();
 			rs.next();
 		} catch(Exception e) {
-			System.out.println("event_manage table에 데이터 insert시 예외 발생");
+			System.out.println("event table에서 event_state 업데이트중 예외 발생");
+			e.printStackTrace();
+		}
+	}
+	
+	// apply_manage table update(apply_state: 대기->완료)
+	public void apply_manage_update(String apply_idx) {
+		String query = "update apply_manage set apply_state='완료' where idx=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, apply_idx);
+			rs = psmt.executeQuery();
+			rs.next();
+		} catch(Exception e) {
+			System.out.println("apply_manage table에서 apply_state 업데이트중 예외 발생");
 			e.printStackTrace();
 		}
 	}

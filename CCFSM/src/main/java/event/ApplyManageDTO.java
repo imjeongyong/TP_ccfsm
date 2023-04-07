@@ -1,44 +1,36 @@
 package event;
 
-public class EventManageDTO {
+public class ApplyManageDTO {
 
 	private String idx;
-	private String userid;
 	private String event_title;
-	private String center_name;
+	private String applicant_id;
+	private String applicant_center;
 	private String applicant_num;
 	private String contect_info;
 	private String apply_state;
 	private String regidate;
-	
-	public EventManageDTO() {
-		
+
+	public ApplyManageDTO() {
+
 	}
-	
-	public EventManageDTO(String idx, String userid, String event_title, String center_name, String applicant_num, String contect_info, String apply_state) {
-		this.idx = idx;
-		this.userid = userid;
+
+	public ApplyManageDTO(String event_title, String applicant_id, String applicant_center,
+			String applicant_num, String contect_info, String apply_state) {
 		this.event_title = event_title;
-		this.center_name = center_name;
+		this.applicant_id = applicant_id;
+		this.applicant_center = applicant_center;
 		this.applicant_num = applicant_num;
 		this.contect_info = contect_info;
 		this.apply_state = apply_state;
 	}
-
+	
 	public String getIdx() {
 		return idx;
 	}
-
+	
 	public void setIdx(String idx) {
 		this.idx = idx;
-	}
-
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
 	}
 
 	public String getEvent_title() {
@@ -49,12 +41,20 @@ public class EventManageDTO {
 		this.event_title = event_title;
 	}
 
-	public String getCenter_name() {
-		return center_name;
+	public String getApplicant_id() {
+		return applicant_id;
 	}
 
-	public void setCenter_name(String center_name) {
-		this.center_name = center_name;
+	public void setApplicant_id(String applicant_id) {
+		this.applicant_id = applicant_id;
+	}
+
+	public String getApplicant_center() {
+		return applicant_center;
+	}
+
+	public void setApplicant_center(String applicant_center) {
+		this.applicant_center = applicant_center;
 	}
 
 	public String getApplicant_num() {
@@ -72,7 +72,7 @@ public class EventManageDTO {
 	public void setContect_info(String contect_info) {
 		this.contect_info = contect_info;
 	}
-	
+
 	public String getApply_state() {
 		return apply_state;
 	}

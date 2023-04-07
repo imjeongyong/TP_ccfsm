@@ -6,7 +6,7 @@ public class MemberDTO {
 	private String pass;
 	private String name;
 	private String regidate;
-	private String apply;
+	private String apply_event;
 	private String apply_state;
 
 	public String getId() {
@@ -41,12 +41,12 @@ public class MemberDTO {
 		this.regidate = regidate;
 	}
 
-	public String getApply() {
-		return apply;
+	public String getApply_event() {
+		return apply_event;
 	}
 
-	public void setApply(String apply) {
-		this.apply = apply;
+	public void setApply_event(String apply_event) {
+		this.apply_event = apply_event;
 	}
 
 	public String getApply_state() {

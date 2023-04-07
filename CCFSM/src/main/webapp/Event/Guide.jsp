@@ -20,8 +20,7 @@
 <body>
 	<jsp:include page="/Frame/HeadNav.jsp" />
 	<header>
-		<img src="${pageContext.request.contextPath}/Resources/Images/img1.jpg"
-			style="height: 100%; width: 100%">
+		<img src="${pageContext.request.contextPath}/Resources/Images/img1.jpg" style="height: 100%; width: 100%">
 	</header>
 	<div class="container">
 		<aside>
@@ -91,8 +90,8 @@
 			</p>
 			<br>
 			<div style="text-align: center;">
-				<button type="submit" class="btn btn-primary"
-					onclick="location.href='Reservation.jsp'" width="center">체험학습
+				<button type="submit" class="btn btn-warning"
+					onclick="location.href='${pageContext.request.contextPath}/event/view.do'" width="center">체험학습
 					신청하기</button>
 			</div>
 		</article>

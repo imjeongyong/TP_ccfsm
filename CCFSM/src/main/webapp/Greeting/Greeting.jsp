@@ -41,9 +41,9 @@
 
 				<h1 class="display-6 m-2 p-2 bg-danger-subtle"
 					style="text-align: center;">인 사 말</h1>
-				&nbsp;&nbsp;&nbsp;&nbsp;<img class="picture"
-					src="${pageContext.request.contextPath}/Resources/Images/gr2.jpg"
-					alt="어린이급식지원센터" style="width: 30%; height: 30%;"><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<img class="picture" src="${pageContext.request.contextPath}/Resources/Images/gr2.jpg"
+					alt="어린이급식지원센터" style="width: 30%; height: 30%;"><br />
 				<p style="font-size: 1.4em; color: #ff3300;">&nbsp;&nbsp;&nbsp;어린이
 					급식 지원 센터는</p>
 				<div class="picture-1">

@@ -8,7 +8,8 @@ public class EventDTO {
 	private String start_date;
 	private String end_date;
 	private String capa;
-	private String rest;
+	private String event_state;
+	private String applicant_center_num;
 
 	public String getIdx() {
 		return idx;
@@ -57,12 +58,20 @@ public class EventDTO {
 	public void setCapa(String capa) {
 		this.capa = capa;
 	}
-	
-	public String getRest() {
-		return rest;
+
+	public String getEvent_state() {
+		return event_state;
 	}
 
-	public void setRest(String rest) {
-		this.rest = rest;
+	public void setEvent_state(String event_state) {
+		this.event_state = event_state;
+	}
+
+	public String getApplicant_center_num() {
+		return applicant_center_num;
+	}
+
+	public void setApplicant_center_num(String applicant_center_num) {
+		this.applicant_center_num = applicant_center_num;
 	}
 }

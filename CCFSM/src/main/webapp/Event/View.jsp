@@ -32,9 +32,6 @@
             title: '${event.title}',
             start: '${event.start_date}',
             end: '${event.end_date}',
-            description: '${event.content}',
-            capacity: ${event.capa},
-            remaining: ${event.rest},
           },
         </c:forEach>
       ],
@@ -78,8 +75,8 @@
 								<th class="text-center" width="*">행사 이름</th>
 								<th class="text-center" width="25%">시작 시간</th>
 								<th class="text-center" width="25%">종료 시간</th>
-								<th class="text-center" width="10%">정원</th>
-								<th class="text-center" width="10%">예약</th>
+								<th class="text-center" width="10%">참여 인원</th>
+								<th class="text-center" width="10%">행사 참여</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -101,16 +98,16 @@
 											<td class="text-center">${row.start_date }</td>
 											<!-- 종료 시간 -->
 											<td class="text-center">${row.end_date }</td>
-											<!-- 정원 -->
-											<td class="text-center">${row.capa - row.rest } / ${row.capa }</td>
+											<!-- 모집 인원 -->
+											<td class="text-center">${row.capa }</td>
 											<!-- 신청 가능 여부 -->
 											<td class="text-center">
 												<c:choose>
-													<c:when test="${row.rest eq 0 }">
-														예약 불가
+													<c:when test="${row.event_state eq '모집완료' }">
+														신청 불가
 													</c:when>
 													<c:otherwise>
-														예약 가능
+														신청 가능
 													</c:otherwise>
 												</c:choose>
 											</td>
@@ -140,8 +137,65 @@
 						<button type="button" class="btn btn-warning"
 							onclick="location.href='../event/manage.do';">이벤트 관리하기(관리자 메뉴)</button>
 					</div>
+					
+					<!-- 이벤트 신청 목록 -->
+					<c:choose>
+						<c:when test="${ empty apply_list }">
+							<!-- 승인할 신청이 없을때 -->
+							<tr>
+								<td colspan="6" class="text-center">승인할 신청이 없습니다^^*</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<div class="table-responsive">
+								<table class="table table-warning table-hover align-middle mt-3">
+									<thead>
+										<tr>
+											<th class="text-center" width="15%">행사 이름</th>
+											<th class="text-center" width="10%">신청자 id</th>
+											<th class="text-center" width="10%">신청 기관</th>
+											<th class="text-center" width="10%">신청 인원</th>
+											<th class="text-center" width="10%">연락처</th>
+											<th class="text-center" width="10%">신청 상태</th>
+											<th class="text-center" width="10%">등록 시간</th>
+											<th class="text-center" width="15%">승인 관리</th>
+										</tr>
+									</thead>
+								<tbody>
+									<c:forEach items="${ apply_list}" var="row" varStatus="loop">
+										<tr>
+											<!-- 행사 이름 -->
+											<td class="text-center">${ row.event_title }</td>	
+											<!-- 신청자 id -->
+											<td class="text-center">${ row.applicant_id }</td>
+											<!-- 신청 기관 -->
+											<td class="text-center">${ row.applicant_center }</td>
+											<!-- 신청 인원 -->
+											<td class="text-center">${ row.applicant_num }</td>
+											<!-- 연락처 -->
+											<td class="text-center">${ row.contect_info }</td>
+											<!-- 신청 상태 -->
+											<td class="text-center">${ row.apply_state }</td>
+											<!-- 등록 시간 -->
+											<td class="text-center">${ row.regidate }</td>
+											<!-- 승인 하기 버튼 -->
+											<td class="text-center">
+												<form method="post" action="../event/manage.do">
+				   									<input type="hidden" name="applicant_id" value="${row.applicant_id }">
+				   									<input type="hidden" name="event_title" value="${row.event_title }">				
+				   									<input type="hidden" name="apply_idx" value="${row.idx }">					
+													<button type="submit" class="btn btn-warning">승인하기</button>
+												</form>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</c:otherwise>
+				</c:choose>
 				</c:if>
-				
+
   		</article>
 	</div>
 	<footer>

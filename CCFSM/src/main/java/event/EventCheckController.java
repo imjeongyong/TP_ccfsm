@@ -38,14 +38,14 @@ public class EventCheckController extends HttpServlet {
 		dao.close();
 		
 		// 반환 멘트 작성
-		if(dto.getApply() == null) {
+		if(dto.getApply_event() == null) {
 			request.setAttribute("currentState", "현재 신청중인 체험관 활동이 없습니다.");
 		} else {
-			request.setAttribute("currentState", dto.getApply() + " 신청했으며, 현재 상태는 승인 " + dto.getApply_state() + "입니다.");
+			request.setAttribute("currentState", dto.getApply_event() + " 신청했으며, 현재 상태는 승인 " + dto.getApply_state() + "입니다.");
 		}
 		
 		// 저장한 데이터 전송
-		request.getRequestDispatcher("/Event/View.jsp").forward(request, response);
+		request.getRequestDispatcher("/event/view.do").forward(request, response);
 		}
 	}
 }
