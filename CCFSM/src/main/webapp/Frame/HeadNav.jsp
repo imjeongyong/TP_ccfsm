@@ -63,15 +63,15 @@
 					<a class="nav-link dropdown-toggle"
 					href="${pageContext.request.contextPath}/Experience/Introduce.jsp"
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						체험학습 
+						체험관 활동
 					</a>
 					<ul class="dropdown-menu">
 						<li>
 							<a class="dropdown-item"
-							href="${pageContext.request.contextPath}/Experience/Introduce.jsp">체험관 안내</a>
+							href="${pageContext.request.contextPath}/Event/Guide.jsp">체험관 안내</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/Experience/Reservation.jsp">체험학습 신청</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/event/view.do">체험관 신청</a>
 						</li>
 					</ul>
 				</li>
@@ -106,7 +106,7 @@
 							<a class="dropdown-item" href="${pageContext.request.contextPath}/qnaboard/list.do">질문 게시판</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/PhotoBoard/PhotoBoard.jsp">포토 갤러리</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/photoboard/list.do">포토 갤러리</a>
 						</li>
 					</ul>
 				</li>

@@ -41,6 +41,7 @@ public class NWriteController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// 1. 파일 업로드 처리 ==============================
 		// 업로드 디렉터리의 물리적 경로 확인
 		String saveDirectory = request.getServletContext().getRealPath("/Uploads");
@@ -53,7 +54,7 @@ public class NWriteController extends HttpServlet {
 		MultipartRequest mr = FileUtil.uploadFile(request, saveDirectory, maxPostSize);
 		if (mr == null) {
 			// 파일 업로드 실패
-			JSFunction.alertLocation(response, "첨부 파일이 제한 용량을 초과합니다.", "../menuboard/write.do");
+			JSFunction.alertLocation(response, "첨부 파일이 제한 용량을 초과합니다.", "../photoboard/write.do");
 			return;
 		}
 

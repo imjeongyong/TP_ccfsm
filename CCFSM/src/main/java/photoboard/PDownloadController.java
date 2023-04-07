@@ -1,4 +1,4 @@
-package noticeboard;
+package photoboard;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fileupload.FileUtil;
-import menuboard.MenuBoardDAO;
+import noticeboard.NoticeBoardDAO;
 
 /**
- * Servlet implementation class NDownloadController
+ * Servlet implementation class PDownloadController
  */
-@WebServlet("/noticeboard/download.do")
-public class NDownloadController extends HttpServlet {
+@WebServlet("/photoboard/download.do")
+public class PDownloadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -33,7 +33,7 @@ public class NDownloadController extends HttpServlet {
 		FileUtil.download(request, response, "/Uploads", sfile, ofile);
 
 		// 해당 게시물의 다운로드 수 1 증가
-		NoticeBoardDAO dao = new NoticeBoardDAO();
+		PhotoBoardDAO dao = new PhotoBoardDAO();
 		dao.downCountPlus(idx);
 		dao.close();
 	}

@@ -1,4 +1,4 @@
-package noticeboard;
+package photoboard;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,15 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 
 import fileupload.FileUtil;
-import menuboard.MenuBoardDAO;
-import menuboard.MenuBoardDTO;
 import utils.JSFunction;
 
 /**
- * Servlet implementation class NEditController
+ * Servlet implementation class PEditController
  */
-@WebServlet("/noticeboard/edit.do")
-public class NEditController extends HttpServlet {
+@WebServlet("/photoboard/edit.do")
+public class PEditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -33,10 +31,10 @@ public class NEditController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String idx = request.getParameter("idx");
-		NoticeBoardDAO dao = new NoticeBoardDAO();
-		NoticeBoardDTO dto = dao.selectView(idx);
+		PhotoBoardDAO dao = new PhotoBoardDAO();
+		PhotoBoardDTO dto = dao.selectView(idx);
 		request.setAttribute("dto", dto);
-		request.getRequestDispatcher("/NoticeBoard/Edit.jsp").forward(request, response);
+		request.getRequestDispatcher("/PhotoBoard/Edit.jsp").forward(request, response);
 	}
 
 	/**
@@ -72,7 +70,7 @@ public class NEditController extends HttpServlet {
 		String content = mr.getParameter("content");
 
 		// DTO에 저장
-		NoticeBoardDTO dto = new NoticeBoardDTO();
+		PhotoBoardDTO dto = new PhotoBoardDTO();
 		dto.setIdx(idx);
 		dto.setUserid(userid);
 		dto.setTitle(title);
@@ -105,17 +103,17 @@ public class NEditController extends HttpServlet {
 		}
 
 		// DB에 수정 내용 반영
-		NoticeBoardDAO dao = new NoticeBoardDAO();
+		PhotoBoardDAO dao = new PhotoBoardDAO();
 		int result = dao.updatePost(dto);
 		dao.close();
-		
+
 		// 성공 or 실패 ?
 		if (result == 1) {
 			// 수정 성공
-			response.sendRedirect("../noticeboard/view.do?idx=" + idx);
+			response.sendRedirect("../photoboard/list.do");
 		} else {
 			// 수정 실패
-			JSFunction.alertLocation(response, "게시물 수정 실패", "../noticeboard/view.do?idx=" + idx);
+			JSFunction.alertLocation(response, "게시물 수정 실패", "../photoboard/list.do");
 		}
 	}
 }

@@ -1,49 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>파일 첨부형 게시판</title>
-<% 
-	String tmpPass = "0000"; 
-	session.setAttribute("uPass", tmpPass);
-%>
+<title>Create Event</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+	integrity="sha512-zoTHZpHqXOuV7rGQatIu/M7y8s1dDIz7sRtIgHtVRZp9XlccjKp6CBvLlW0tuNJQ0xuUG7FjvzIHrgUpmdG8LQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<script type="text/javascript">
-	function validationForm(form) {
-		if(form.pass.value == "") {
-			alert("비밀번호를 입력하세요.");
-			form.pass.focus();
-			return false;
-		}
-	}
-</script>
+
 </head>
 <body>
-	<h2></h2>
-	<h2>파일 첨부형 게시판 - 비밀번호 검증(Pass)</h2>
-	<form name="writeFrm" method="post" action="../menuboard/pass.do" onsubmit="return validationForm(this);">
-		<input type="hidden" name="idx" value="${param.idx }" />
-		<input type="hidden" name="mode" value="${param.mode }" />
-		<table border="1" width="90%">
-			<tr>
-				<td>비밀번호</td>
-				<td>
-					<input type="password" name="pass" style="width:100px;" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<button type="submit">검증하기</button>
-					<button type="reset">RESET</button>
-					<button type="button" onclick="location.href='../menuboard/list.do';">
-						목록 바로가기
-					</button>
-				</td>
-			</tr>
-		</table>
-	</form>
+	<div class="container mt-5">
+		<h1>Create Event</h1>
+		<form action="insert_event.jsp" method="post">
+			<div class="mb-3">
+				<label for="title" class="form-label">Title</label> <input
+					type="text" class="form-control" id="title" name="title" required>
+			</div>
+			<div class="mb-3">
+				<label for="content" class="form-label">Content</label> <input
+					type="text" class="form-control" id="content" name="content"
+					required>
+			</div>
+			<div class="mb-3">
+				<label for="start_date" class="form-label">Start Date and
+					Time</label> <input type="datetime-local" class="form-control"
+					id="start_date" name="start_date" required>
+			</div>
+			<div class="mb-3">
+				<label for="end_date" class="form-label">End Date and Time</label> <input
+					type="datetime-local" class="form-control" id="end_date"
+					name="end_date" required>
+			</div>
+			<div class="mb-3">
+				<label for="capa" class="form-label">Capacity</label> <input
+					type="number" class="form-control" id="capa" name="capa" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
 </body>
 </html>

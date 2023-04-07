@@ -1,4 +1,4 @@
-package noticeboard;
+package photoboard;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,15 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 
 import fileupload.FileUtil;
-import menuboard.MenuBoardDAO;
-import menuboard.MenuBoardDTO;
+import noticeboard.NoticeBoardDAO;
+import noticeboard.NoticeBoardDTO;
 import utils.JSFunction;
 
 /**
- * Servlet implementation class NEditController
+ * Servlet implementation class PWriteController
  */
-@WebServlet("/noticeboard/edit.do")
-public class NEditController extends HttpServlet {
+@WebServlet("/photoboard/write.do")
+public class PWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -32,11 +32,7 @@ public class NEditController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String idx = request.getParameter("idx");
-		NoticeBoardDAO dao = new NoticeBoardDAO();
-		NoticeBoardDTO dto = dao.selectView(idx);
-		request.setAttribute("dto", dto);
-		request.getRequestDispatcher("/NoticeBoard/Edit.jsp").forward(request, response);
+		request.getRequestDispatcher("/PhotoBoard/Write.jsp").forward(request, response);
 	}
 
 	/**
@@ -45,9 +41,9 @@ public class NEditController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		// 1. 파일 업로드 처리 =================================
-		// 2. 업로드 디렉터리의 물리적 경로 확인
+
+		// 1. 파일 업로드 처리 ==============================
+		// 업로드 디렉터리의 물리적 경로 확인
 		String saveDirectory = request.getServletContext().getRealPath("/Uploads");
 
 		// 초기화 매개변수로 설정한 첨부 파일 최대 용량 확인
@@ -56,32 +52,24 @@ public class NEditController extends HttpServlet {
 
 		// 파일 업로드
 		MultipartRequest mr = FileUtil.uploadFile(request, saveDirectory, maxPostSize);
-
 		if (mr == null) {
-			JSFunction.alertBack(response, "첨부 파일이 제한 용량을 초과합니다.");
+			// 파일 업로드 실패
+			JSFunction.alertLocation(response, "첨부 파일이 제한 용량을 초과합니다.", "../photoboard/write.do");
 			return;
 		}
 
-		// 2. 파일 업로드 외 처리 ===============================
-		// 수정 내용을 매개변수에서 얻어옴
-		String idx = mr.getParameter("idx");
-		String prevOfile = mr.getParameter("prevOfile");
-		String prevSfile = mr.getParameter("prevSfile");
-		String userid = mr.getParameter("userid");
-		String title = mr.getParameter("title");
-		String content = mr.getParameter("content");
-
-		// DTO에 저장
-		NoticeBoardDTO dto = new NoticeBoardDTO();
-		dto.setIdx(idx);
-		dto.setUserid(userid);
-		dto.setTitle(title);
-		dto.setContent(content);
+		// 2. 파일 업로드 외 처리 ===========================
+		// 폼값을 DTO에 저장
+		PhotoBoardDTO dto = new PhotoBoardDTO();
+		dto.setTitle(mr.getParameter("title"));
+		dto.setUserid(mr.getParameter("userid"));
+		dto.setContent(mr.getParameter("content"));
 
 		// 원본 파일명과 저장된 파일 이름 설정
 		String fileName = mr.getFilesystemName("ofile");
 		if (fileName != null) {
 			// 첨부 파일이 있을 경우 파일명 변경
+
 			// 새로운 파일명 생성
 			String now = new SimpleDateFormat("yyyyMMdd_HmsS").format(new Date());
 			String ext = fileName.substring(fileName.lastIndexOf("."));
@@ -92,30 +80,20 @@ public class NEditController extends HttpServlet {
 			File newFile = new File(saveDirectory + File.separator + newFileName);
 			oldFile.renameTo(newFile);
 
-			// DTO에 저장
-			dto.setOfile(fileName); // 원래 파일 이름
-			dto.setSfile(newFileName); // 서버에 저장된 파일 이름
-
-			// 기존 파일 삭제
-			FileUtil.deleteFile(request, "/Uploads", prevSfile);
-		} else {
-			// 첨부 파일이 없으면 기존 이름 유지
-			dto.setOfile(prevOfile);
-			dto.setSfile(prevSfile);
+			dto.setOfile(fileName);
+			dto.setSfile(newFileName);
 		}
 
-		// DB에 수정 내용 반영
-		NoticeBoardDAO dao = new NoticeBoardDAO();
-		int result = dao.updatePost(dto);
+		// DAO를 통해 DB에 게시 내용 저장
+		PhotoBoardDAO dao = new PhotoBoardDAO();
+		int result = dao.insertWrite(dto);
 		dao.close();
-		
-		// 성공 or 실패 ?
-		if (result == 1) {
-			// 수정 성공
-			response.sendRedirect("../noticeboard/view.do?idx=" + idx);
-		} else {
-			// 수정 실패
-			JSFunction.alertLocation(response, "게시물 수정 실패", "../noticeboard/view.do?idx=" + idx);
+
+		// 성공 or 실패?
+		if (result == 1) { // 글쓰기 성공
+			response.sendRedirect("../photoboard/list.do");
+		} else { // 글쓰기 실패
+			response.sendRedirect("../photoboard/write.do");
 		}
 	}
 }

@@ -31,6 +31,7 @@ public class QWriteController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// 폼값을 DTO에 저장
 		QnABoardDTO dto = new QnABoardDTO();
 		dto.setTitle(request.getParameter("title"));

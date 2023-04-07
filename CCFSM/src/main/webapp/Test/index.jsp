@@ -16,6 +16,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Resources/Style.css">
 <jsp:include page="/Frame/Header.jsp" />
+
 </head>
 <body>
 	<jsp:include page="/Frame/HeadNav.jsp" />
@@ -116,6 +117,7 @@
 										style="text-decoration: none; color: black;">질문 게시판,</a> <a
 										href="PhotoBoard/List.jsp"
 										style="text-decoration: none; color: black;">포토 갤러리</a>
+
 								</p>
 							</div>
 						</div>
@@ -133,6 +135,7 @@
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				<span class="visually-hidden">Next</span>
 			</button>
+
 		</article>
 	</div>
 	<footer>

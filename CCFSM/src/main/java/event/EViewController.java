@@ -1,21 +1,20 @@
-package noticeboard;
+package event;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import photoboard.PhotoBoardDAO;
-import photoboard.PhotoBoardDTO;
+import noticeboard.NoticeBoardDAO;
+import noticeboard.NoticeBoardDTO;
 
 /**
- * Servlet implementation class NViewController
+ * Servlet implementation class EViewController
  */
-@WebServlet("/noticeboard/view.do")
-public class NViewController extends HttpServlet {
+@WebServlet("/event/eview.do")
+public class EViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -24,12 +23,13 @@ public class NViewController extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
+		
 		// 게시물 불러오기
-		NoticeBoardDAO dao = new NoticeBoardDAO();
+		EventDAO dao = new EventDAO();
 		String idx = request.getParameter("idx");
-		dao.updateVisitCount(idx); // 조회수 1 증가
-		NoticeBoardDTO dto = dao.selectView(idx);
+		EventDTO dto = dao.eventView(idx); // idx로 조회
+
 		dao.close();
 
 		// 줄바꿈 처리
@@ -37,6 +37,6 @@ public class NViewController extends HttpServlet {
 
 		// 게시물(dto) 저장 후 뷰로 포워드
 		request.setAttribute("dto", dto);
-		request.getRequestDispatcher("/NoticeBoard/View.jsp").forward(request, response);
+		request.getRequestDispatcher("/Event/EventView.jsp").forward(request, response);
 	}
 }

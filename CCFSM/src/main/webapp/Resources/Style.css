@@ -6,7 +6,7 @@ body {
 }
 
 header {
-	height: 180px;
+	height: 200px;
 }
 
 .container {
@@ -14,7 +14,7 @@ header {
 }
 
 aside, article {
-	height: calc(100vh - 250px);
+	height: calc(100vh - 270px);
 }
 
 aside {

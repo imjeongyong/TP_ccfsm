@@ -68,10 +68,50 @@ public class MemberDAO extends DBConnPool {
 			psmt.setString(2, uemail); // 쿼리문의 두 번째 인파라미터에 값 설정
 			psmt.setString(3, upass); // 쿼리문의 두 번째 인파라미터에 값 설정
 			psmt.setString(4, uname); // 쿼리문의 두 번째 인파라미터에 값 설정
-			System.out.println("쿼리문 : " + query);
 			rs = psmt.executeQuery(); // 쿼리문 실행
 			rs.next();
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// id로 DB테이블 정보 검색 및 dto로 반환
+	public MemberDTO searchId(String userid) {
+		MemberDTO dto = new MemberDTO();
+		
+		String query = "select * from member where id=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, userid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setApply(rs.getString("apply"));
+				dto.setApply_state(rs.getString("apply_state"));
+			} 
+			
+			} catch(Exception e) {
+				System.out.println("id 검색중 예외 발생");
+				e.printStackTrace();
+		}
+		return dto;
+	}
+	
+	// member table update(apply->행사명, apply_state->대기)
+	public void applyEvent(String event_name, String userid) {
+		String query = "update member set apply=?, apply_state='대기' where id=?";
+		System.out.println(query);
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, event_name);
+			psmt.setString(2, userid);
+			rs = psmt.executeQuery();
+			rs.next();
+		} catch (Exception e) {
+			System.out.println("체험관 신청 중 예외 발생");
 			e.printStackTrace();
 		}
 	}
