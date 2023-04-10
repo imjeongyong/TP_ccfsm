@@ -19,7 +19,7 @@
 		<aside>
 			<jsp:include page="/Navigator/Board.jsp" />
 		</aside>
-		<article>
+		<article style="overflow: auto;">
 			<h1 class="display-6 m-2 p-2 bg-danger-subtle" style="text-align: center;">식단표 게시판</h1>
 			<!-- 검색 폼 -->
 			<div class="container-fluid px-5 my-5">
