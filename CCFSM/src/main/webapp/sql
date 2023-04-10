@@ -1,0 +1,111 @@
+-- 로그인 기능(회원가입, 로그인 등), 참여 행사 지원, 승인상태 확인
+CREATE TABLE MEMBER (
+	id varchar2(2000) PRIMARY key,
+	email varchar2(2000) NOT NULL,
+	pass varchar2(2000) NOT NULL,
+	name varchar2(2000) NOt NULL,
+	regidate DATE DEFAULT sysdate NOT NULL,
+	apply_event varchar2(2000),
+	apply_state varchar2(2000)
+)
+
+-- 관리자 계정 추가
+INSERT INTO MEMBER (id, email, pass, name)
+VALUES ('admin', 'admin@naver.com', '1234', '관리자')
+
+-- 시퀀스 생성
+CREATE SEQUENCE seq_board_num
+	INCREMENT BY 1
+	START WITH 1
+	MINVALUE 1
+	nomaxvalue
+	nocycle
+	nocache
+
+-- 이벤트 등록 테이블
+CREATE TABLE event (
+    idx NUMBER PRIMARY KEY,
+    title VARCHAR2(2000),
+    content varchar2(2000),
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    capa NUMBER NOT NULL,
+    event_state varchar2(2000) NOT NULL
+)
+
+--이벤트 신청 관리 테이블
+CREATE TABLE apply_manage (
+	idx NUMBER PRIMARY KEY,
+	event_title varchar2(2000) NOT NULL,
+	applicant_id varchar2(2000) NOT NULL,
+	applicant_center varchar2(2000) NOT NULL,
+	applicant_num NUMBER NOT NULL,
+	contect_info varchar2(2000) NOT NULL,
+	apply_state varchar2(2000) NOT NULL,
+	regidate DATE DEFAULT sysdate NOT NULL
+)
+
+--사진첨부 기능
+CREATE TABLE photoboard (
+	idx NUMBER PRIMARY KEY,
+	userid varchar2(2000) NOT NULL,
+	title varchar2(2000) NOT NULL,
+	content varchar2(2000) NOT NULL,
+	postdate DATE default sysdate NOT NULL,
+	ofile varchar2(2000),
+	sfile varchar2(300),
+	downcount number(5) DEFAULT 0 NOT NULL,
+	visitcount NUMBER DEFAULT 0 NOT null
+)
+
+
+--매뉴 게시판 테이블(파일 첨부 기능)
+CREATE TABLE menuboard (
+	idx NUMBER PRIMARY KEY,
+	userid varchar2(2000) NOT NULL,
+	title varchar2(2000) NOT NULL,
+	content varchar2(2000) NOT NULL,
+	postdate DATE default sysdate NOT NULL,
+	ofile varchar2(2000),
+	sfile varchar2(300),
+	downcount number(5) DEFAULT 0 NOT NULL,
+	visitcount NUMBER DEFAULT 0 NOT null
+)
+
+--레시피 게시판 테이블(파일 첨부 기능)
+	CREATE TABLE recipeboard (
+	idx NUMBER PRIMARY KEY,
+	userid varchar2(2000) NOT NULL,
+	title varchar2(2000) NOT NULL,
+	content varchar2(2000) NOT NULL,
+	postdate DATE default sysdate NOT NULL,
+	ofile varchar2(2000),
+	sfile varchar2(300),
+	downcount number(5) DEFAULT 0 NOT NULL,
+	visitcount NUMBER DEFAULT 0 NOT null
+)
+
+--공지사항 게시판 테이블(파일 첨부 기능)
+CREATE TABLE noticeboard (
+	idx NUMBER PRIMARY KEY,
+	userid varchar2(2000) NOT NULL,
+	title varchar2(2000) NOT NULL,
+	content varchar2(2000) NOT NULL,
+	postdate DATE default sysdate NOT NULL,
+	ofile varchar2(2000),
+	sfile varchar2(300),
+	downcount number(5) DEFAULT 0 NOT NULL,
+	visitcount NUMBER DEFAULT 0 NOT null
+)
+
+--질문 게시판 테이블(답변달기, 답변 확인 기능)
+CREATE TABLE qnaboard (
+	idx NUMBER PRIMARY KEY,
+	userid varchar2(2000) NOT NULL,
+	pass varchar2(100) NOT NULL,
+	title varchar2(2000) NOT NULL,
+	content varchar2(2000) NOT NULL,
+	postdate DATE default sysdate NOT NULL,
+	visitcount NUMBER DEFAULT 0 NOT NULL,
+	reply varchar2(2000)
+)

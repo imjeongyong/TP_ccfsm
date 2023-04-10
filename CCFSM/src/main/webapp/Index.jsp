@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Resources/Style.css">
 <jsp:include page="/Frame/Header.jsp" />
 </head>
-<body>
+<body style="background-color: orange;">
    <jsp:include page="/Frame/HeadNav.jsp" />
    <header>
       <img src="${pageContext.request.contextPath}/Resources/Images/img1.jpg" style="height: 100%; width: 100%">
@@ -35,7 +35,7 @@
                <div class="carousel-item active">
                   <img src="Resources/Images/Homeimg1.jpg" class="d-block w-100" alt="...">
                   <div class="carousel-caption d-none d-md-block">
-                     <h5 style="color: black">어린이 급식지원 관리센터</h5>
+                     <h5 style="color: black">어린이 급식관리 지원센터</h5>
                      <p style="color: black">반갑습니다. 찾아주셔서 감사합니다.</p>
                   </div>
                </div>

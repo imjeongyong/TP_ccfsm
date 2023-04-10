@@ -13,8 +13,8 @@ public class EventDAO extends DBConnPool {
 	// event 테이블에 데이터 insert
 	public void insertEvent(EventDTO dto) {
 
-		String query = " insert into event(idx, title, content, start_date, end_date, capa, event_state, applicant_center_num) "
-				+ " values(seq_board_num.nextval, ?, ?, to_date(?, 'YYYY-MM-DD HH24:MI'), to_date(?, 'YYYY-MM-DD HH24:MI'), ?, ?, ? )";
+		String query = " insert into event(idx, title, content, start_date, end_date, capa, event_state) "
+				+ " values(seq_board_num.nextval, ?, ?, to_date(?, 'YYYY-MM-DD HH24:MI'), to_date(?, 'YYYY-MM-DD HH24:MI'), ?, ?)";
 		
 		System.out.println("dto.getTitle()" + dto.getTitle());
 		System.out.println("dto.getContent()" + dto.getContent());
@@ -30,7 +30,6 @@ public class EventDAO extends DBConnPool {
 			psmt.setString(4, dto.getEnd_date());
 			psmt.setString(5, dto.getCapa());
 			psmt.setString(6, "모집중");
-			psmt.setString(7, "0");
 			
 			System.out.println("query : " + query);
 			rs = psmt.executeQuery(); // 쿼리문 실행
@@ -65,7 +64,6 @@ public class EventDAO extends DBConnPool {
 				dto.setEnd_date(rs.getString("end_date"));
 				dto.setCapa(rs.getString("capa"));
 				dto.setEvent_state(rs.getString("event_state"));
-				dto.setApplicant_center_num(rs.getString("Applicant_center_num"));
 
 				events.add(dto);
 			}
@@ -94,7 +92,6 @@ public class EventDAO extends DBConnPool {
 				dto.setEnd_date(rs.getString("end_date"));
 				dto.setCapa(rs.getString("capa"));
 				dto.setEvent_state(rs.getString("event_state"));
-				dto.setApplicant_center_num(rs.getString("applicant_center_num"));
 			}
 		} catch (Exception e) {
 			System.out.println("게시물 상세보기 중 예외 발생");
